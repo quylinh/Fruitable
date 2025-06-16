@@ -423,20 +423,59 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="~/Areas/Admin/assets/js/material-dashboard.min.js?v=3.0.2"></script>
+    @*<script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const currentPath = window.location.pathname.toLowerCase();
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href')?.toLowerCase() === currentPath) {
+                        link.classList.add('active', 'bg-gradient-primary');
+                    } else {
+                        link.classList.remove('active', 'bg-gradient-primary');
+                    }
+                });
+            });
+        </script>*@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const currentPath = window.location.pathname.toLowerCase();
+
             const navLinks = document.querySelectorAll('.nav-link');
 
             navLinks.forEach(link => {
-                if (link.getAttribute('href')?.toLowerCase() === currentPath) {
-                    link.classList.add('active', 'bg-gradient-primary');
+                const href = link.getAttribute('href');
+                if (!href) return;
+
+                const hrefLower = href.toLowerCase();
+
+                // Trường hợp đặc biệt: adminnhaphuyhang gán active cho AdminSanPham
+                if (currentPath.includes("/admin/adminnhaphuyhang")) {
+                    if (hrefLower === "/admin/adminsanpham") {
+                        link.classList.add("active", "bg-gradient-primary");
+                    } else {
+                        link.classList.remove("active", "bg-gradient-primary");
+                    }
+                    return;
+                }
+
+                // Trường hợp vào đúng /Admin (hoặc /Admin/)
+                if ((currentPath === "/admin" || currentPath === "/admin/") && hrefLower === "/admin/adminhome") {
+                    link.classList.add("active", "bg-gradient-primary");
+                    return;
+                }
+
+                // Mặc định: active nếu currentPath bắt đầu bằng href
+                if (currentPath.startsWith(hrefLower)) {
+                    link.classList.add("active", "bg-gradient-primary");
                 } else {
-                    link.classList.remove('active', 'bg-gradient-primary');
+                    link.classList.remove("active", "bg-gradient-primary");
                 }
             });
         });
     </script>
+
+
 
 </body>
 

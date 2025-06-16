@@ -313,7 +313,7 @@ namespace doantotnghiep.Controllers
                 return View("FailureView");
             }
             //on successful payment, show success page to user.  
-            return View("SuccessView");
+            return RedirectToAction("Index", "Home");
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -433,10 +433,7 @@ namespace doantotnghiep.Controllers
         {
             return View();
         }
-        public ActionResult SuccessView()
-        {
-            return View();
-        }
+       
 
     }
 }

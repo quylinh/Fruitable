@@ -73,58 +73,101 @@
                             </div>
                         </nav>
                         <div class="tab-content mb-5">
-                          
                             <div class="tab-pane active" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                                                      <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p>
-                                            The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    @*                                    <img src="~/Areas/User/Asset/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                    *@                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">
-                                            The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit
-                                        </p>
+                                <div class="w-100 d-flex">
+                                    <div class="w-75">
+                                        @if (Model.NhanXetSanPhams != null && Model.NhanXetSanPhams.Any())
+                                        {
+                                            foreach (var item in Model.NhanXetSanPhams
+                                                                       .OrderByDescending(n => n.NgayNhanXet)
+                                                                       .Take(2))
+                                            {
+                                                <div class="mb-4 border-bottom pb-3">
+                                                    <p class="mb-1 text-muted" style="font-size: 14px;">
+                                                        @item.NgayNhanXet
+                                                    </p>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h5 class="mb-0">@(item.Account_KhachHang?.TaiKhoan ?? "Ẩn danh")</h5>
+                                                        <div class="d-flex mb-0">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                if (i <= item.SoSao)
+                                                                {
+                                                                    <i class="fa fa-star text-warning"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="fa fa-star text-secondary"></i>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <p class="text-dark mt-2">@item.NoiDung</p>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <p class="text-muted">Chưa có đánh giá nào cho sản phẩm này.</p>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">
-                                    Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3
-                                </p>
-                                <p class="mb-0">
-                                    Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit
-                                </p>
-                            </div>
+
+
+
+                            <!--<div class="tab-pane active" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+    <div class="d-flex">
+                                          <div class="">
+            <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+            <div class="d-flex justify-content-between">
+                <h5>Jason Smith</h5>
+                <div class="d-flex mb-3">
+                    <i class="fa fa-star text-secondary"></i>
+                    <i class="fa fa-star text-secondary"></i>
+                    <i class="fa fa-star text-secondary"></i>
+                    <i class="fa fa-star text-secondary"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+            <p>
+                The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
+                words etc. Susp endisse ultricies nisi vel quam suscipit
+            </p>
+        </div>
+    </div>
+    <div class="d-flex">-->
+                            @*                                    <img src="~/Areas/User/Asset/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                            *@
+                            <!--<div class="">
+                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                <div class="d-flex justify-content-between">
+                    <h5>Sam Peters</h5>
+                    <div class="d-flex mb-3">
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star text-secondary"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                </div>
+                <p class="text-dark">
+                    The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic
+                    words etc. Susp endisse ultricies nisi vel quam suscipit
+                </p>
+            </div>
+        </div>
+    </div>-->
+                            @*<div class="tab-pane" id="nav-vision" role="tabpanel">
+            <p class="text-dark">
+                Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
+                amet diam et eos labore. 3
+            </p>
+            <p class="mb-0">
+                Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
+                Clita erat ipsum et lorem et sit
+            </p>
+        </div>*@
                         </div>
                     </div>
 

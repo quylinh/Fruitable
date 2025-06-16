@@ -1,8 +1,15 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "FailureView";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div style=" margin-top: 200px; margin-left: 40px;">
+    <h2 style="color: red;">Lỗi đặt hàng</h2>
+    <p>Bạn sẽ được chuyển về trang chủ sau 3 giây...</p>
+</div>
 
-<h2>FailureView</h2>
 
+<script>
+        setTimeout(function () {
+            window.location.href = '@Url.Action("Index", "Home")';
+        }, 3000); // 3000ms = 3 giây
+    </script>

@@ -361,6 +361,7 @@
     <Content Include="Asset\img\fruite-item-4.jpg" />
     <Content Include="Asset\img\fruite-item-5.jpg" />
     <Content Include="Asset\img\fruite-item-6.jpg" />
+    <Content Include="Asset\img\FRUITSTABLE.svg" />
     <Content Include="Asset\img\hero-img-1.png" />
     <Content Include="Asset\img\hero-img-2.jpg" />
     <Content Include="Asset\img\hero-img.jpg" />
@@ -819,7 +820,6 @@
     <Content Include="Areas\Admin\Views\AdminQuanLyDonHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminQuanLyDonHang\Detail.cshtml" />
     <Content Include="Areas\Admin\Views\AdminOrder\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminNhapHuyHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminNhapHuyHang\NhapHang.cshtml" />
     <Content Include="Areas\Admin\Views\AdminNhapHuyHang\HuyHang.cshtml" />
     <EntityDeploy Include="Models\Model1.edmx">

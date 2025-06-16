@@ -78,3 +78,4 @@ C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\Sys
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CopyComplete
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.dll
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.pdb
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.AssemblyReference.cache

@@ -251,5 +251,13 @@ namespace doantotnghiep.Controllers
             ViewBag.Success = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập.";
             return View("Index");
         }
+        public ActionResult Logout()
+        {
+            Session.Clear(); // Xóa tất cả session
+            FormsAuthentication.SignOut(); // Đăng xuất khỏi hệ thống Forms Auth nếu có dùng
+
+            return RedirectToAction("Index", "Home"); // Quay về trang chủ
+        }
+
     }
 }

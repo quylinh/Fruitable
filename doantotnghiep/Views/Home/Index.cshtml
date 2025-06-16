@@ -439,7 +439,7 @@
 </div>
 <!-- Banner Section End -->
 <!-- Bestsaler Product Start -->
-
+@*
 <div class="container">
     <div class="row g-4">
         @if (Model != null && Model.Count() > 0)
@@ -485,7 +485,7 @@
         }
     </div>
 </div>
-
+*@
 
 
 <!-- Bestsaler Product End -->
@@ -534,86 +534,66 @@
             <h4 class="text-primary">Đánh giá của khách hàng</h4>
             <h1 class="display-5 mb-5 text-dark">"Lời nhận xét từ khách hàng của chúng tôi!"</h1>
         </div>
-        <div class="owl-carousel testimonial-carousel">
-            <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                <div class="position-relative">
-                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                    <div class="mb-4 pb-4 border-bottom border-secondary">
-                        <p class="mb-0">
-                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        </p>
-                    </div>
-                    <div class="d-flex align-items-center flex-nowrap">
-                        <div class="bg-secondary rounded">
-                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                        </div>
-                        <div class="ms-4 d-block">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star"></i>
+        @if (Model != null && Model.Any())
+        {
+            <div class="owl-carousel testimonial-carousel owl-theme">
+                @foreach (var item in Model)
+                {
+                    var nhanxet = item.NhanXetSanPhams
+                        .OrderByDescending(n => n.NgayNhanXet)
+                        .FirstOrDefault();
+                    if (nhanxet != null)
+                    {
+                        <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                            <div class="position-relative">
+                                <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+
+                                <div class="mb-4 pb-4 border-bottom border-secondary">
+                                    <p class="mb-0" title="@nhanxet.NoiDung">
+                                        @nhanxet.NoiDung
+                                    </p>
+                                </div>
+
+                                <div class="d-flex align-items-center flex-nowrap">
+                                    <div class="bg-secondary rounded">
+                                        <img src="@item.AnhSP"
+                                             alt="@item.TenSP"
+                                             class="img-fluid rounded"
+                                             style="width: 100px; height: 100px;" />
+                                    </div>
+                                    <div class="ms-4 d-block">
+                                        <h4 class="text-dark">@nhanxet.Account_KhachHang.TaiKhoan</h4>
+                                        <p class="m-0 pb-3">@item.TenSP</p>
+                                        <div class="d-flex pe-5">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= (nhanxet?.SoSao ?? 0))
+                                                {
+                                                    <i class="fas fa-star text-primary"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-star text-muted"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <small class="text-muted">
+                                            @(nhanxet.NgayNhanXet.HasValue ? nhanxet.NgayNhanXet.Value.ToString("dd/MM/yyyy") : "Không rõ ngày")
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    }
+                }
             </div>
-            <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                <div class="position-relative">
-                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                    <div class="mb-4 pb-4 border-bottom border-secondary">
-                        <p class="mb-0">
-                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        </p>
-                    </div>
-                    <div class="d-flex align-items-center flex-nowrap">
-                        <div class="bg-secondary rounded">
-                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                        </div>
-                        <div class="ms-4 d-block">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial-item img-border-radius bg-light rounded p-4">
-                <div class="position-relative">
-                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
-                    <div class="mb-4 pb-4 border-bottom border-secondary">
-                        <p class="mb-0">
-                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        </p>
-                    </div>
-                    <div class="d-flex align-items-center flex-nowrap">
-                        <div class="bg-secondary rounded">
-                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
-                        </div>
-                        <div class="ms-4 d-block">
-                            <h4 class="text-dark">Client Name</h4>
-                            <p class="m-0 pb-3">Profession</p>
-                            <div class="d-flex pe-5">
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                                <i class="fas fa-star text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        }
+        else
+        {
+            <p class="text-center text-muted">Chưa có nhận xét nào.</p>
+        }
+
+
     </div>
 </div>
 @section scripts {

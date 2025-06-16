@@ -23,13 +23,46 @@
     <!-- Libraries Stylesheet -->
     <link href="~/Asset/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="~/Asset/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link rel="icon" href="@Url.Content("~/Asset/img/FRUITSTABLE.svg")" type="image/svg+xml">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="~/Asset/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="~/Asset/css/style.css" rel="stylesheet">
+    <style>
+        .user-hover-container {
+            cursor: pointer;
+        }
+
+        .user-hover-box {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 150px;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 999;
+            text-align: center;
+        }
+
+        .user-hover-container:hover .user-hover-box {
+            display: block;
+        }
+
+        .user-hover-box a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .user-hover-box a:hover {
+                text-decoration: underline;
+            }
+    </style>
+
 </head>
 
 <body>
@@ -96,7 +129,7 @@
 
                             <a href="@Url.Action("Index", "Contact")" class="nav-item nav-link active">Liên hệ</a>}
                         else
-                        { <a href="@Url.Action("Index", "Contact")z" class="nav-item nav-link">Liên hệ</a>
+                        { <a href="@Url.Action("Index", "Contact")" class="nav-item nav-link">Liên hệ</a>
                         }
 
 
@@ -113,9 +146,29 @@
                                 @soLuong
                             </span>
                         </a>
-                        <a href="@Url.Action("Index","LoginSignup")" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
+                        @*<a href="@Url.Action("Index","LoginSignup")" class="my-auto">
+            <i class="fas fa-user fa-2x"></i>
+        </a>*@
+                        <div class="user-hover-container position-relative d-inline-block"style="margin-top: 6px" >
+                            @if (Session["UserName"] != null)
+                            {
+                                <span class="my-auto ">Xin chào <br /><strong>@Session["UserName"]</strong></span>
+
+                                <div class="user-hover-box" style="margin-top:5px" >
+                                    <a href="@Url.Action("Logout", "LoginSignup")">Đăng xuất</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="#" class="my-auto">
+                                    <i class="fas fa-user fa-2x "></i>
+                                </a>
+                                <div class="user-hover-box" @*style="margin-bottom: 8px"*@>
+                                    <a href="@Url.Action("Index", "LoginSignup")">Đăng nhập</a>
+                                </div>
+                            }
+                        </div>
+
                     </div>
                 </div>
             </nav>
