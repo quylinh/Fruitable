@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5378db90c7ff48428556ce53a6c2207a" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="FreshFruitDBModel.Account_KhachHang" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.ChiTietGioHang" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.DanhMucSP" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.DonHang" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.GioHang" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.HuyHang" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.NhanXetSanPham" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.NhapHang" Width="1.5" PointX="5.25" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.SanPham" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.sysdiagram" Width="1.5" PointX="7.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.ChiTietDonHangView" Width="1.5" PointX="8.75" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__DonHang__MaKH__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__GioHang__MaKH__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__GioHang__MaKH__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__NhanXetSan__MaKH__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietGi__MaGio__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietGi__MaGio__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietGio__MaSP__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietGio__MaSP__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__SanPham__MaDM__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__SanPham__MaDM__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__HuyDonHang__MaSP__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__NhanXetSan__MaSP__2BFE89A6" ManuallyRouted="false" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__NhapHang__MaSP__3D2915A8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FreshFruitDBModel.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="8.125" />
+        <AssociationConnector Association="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietDon__MaDH__1BC821DD" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietDon__MaDH__412EB0B6" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietDon__MaSP__1CBC4616" />
+        <AssociationConnector Association="FreshFruitDBModel.FK__ChiTietDon__MaSP__4222D4EF" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

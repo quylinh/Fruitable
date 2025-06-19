@@ -1,0 +1,94 @@
+﻿@{ Layout = null; }
+@model doantotnghiep.Models.Account_KhachHang
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký</title>
+    <link rel="stylesheet" href="~/Asset/css/LoginSignup.css" asp-append-version="true">
+</head>
+<body>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-up">
+                        @using (Html.BeginForm("DatLaiMatKhau", "LoginSignup", FormMethod.Post))
+                        {
+                            @Html.Hidden("token", (string)ViewBag.Token)
+
+                            <label>Mật khẩu mới:</label>
+                            <input type="password" name="MatKhauMoi" required class="form-control" />
+                            <br />
+                            <label>Xác nhận mật khẩu:</label>
+                            <input type="password" name="XacNhanMatKhau" required class="form-control" />
+                            <br />
+                            <button type="submit" class="btn btn-success">Đặt lại mật khẩu</button>
+                        }
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <p style="color:red">@ViewBag.Error</p>
+                        }
+                        @if (ViewBag.Success != null)
+                        {
+                            <p style="color:green">@ViewBag.Success</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- END SIGN UP -->
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-in">
+                        @using (Html.BeginForm("DatLaiMatKhau", "LoginSignup", FormMethod.Post))
+                        {
+                            @Html.Hidden("token", (string)ViewBag.Token)
+
+                            <label style="margin-left: -75px;">
+                                Mật khẩu mới:
+                            </label>
+                            <input style=" padding-right: 39px;" type="password" name="MatKhauMoi" required class="form-control" />
+                            <br /> <br />
+                            <label style="margin-left: -38px;">Xác nhận mật khẩu:</label>
+
+                            <input style=" padding-right: 37px;" type="password" name="XacNhanMatKhau" required class="form-control" />
+                            <br /> <br />
+                            <button type="submit" class="btn btn-success">Đặt lại mật khẩu</button>
+                        }
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <p style="color:red">@ViewBag.Error</p>
+                        }
+                        @if (ViewBag.Success != null)
+                        {
+                            <p style="color:green">@ViewBag.Success</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- END SIGN IN -->
+        </div>
+        <!-- END FORM SECTION -->
+        <div class="row content-row">
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2 style="text-decoration: none; font-family: Arial, sans-serif; font-weight: bold;">ĐẶT LẠI MẬT KHẨU?</h2>
+                </div>
+            </div>
+            <div class="col align-items-center flex-col">
+                <div class="text sign-up">
+                    <h2>ĐẶT LẠI MẬT KHẨU</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Asset/js/LoginSignup.js"></script>
+</body>
+</html>

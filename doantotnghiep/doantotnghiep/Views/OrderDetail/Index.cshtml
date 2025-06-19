@@ -1,0 +1,491 @@
+﻿@using System.Collections.Generic
+@model System.Collections.Generic.List<doantotnghiep.Models.DonHang>
+
+@{
+    ViewBag.Title = "Lịch sử đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.active = 4;
+}
+@using System.Globalization
+
+@foreach (var donHang in Model)
+{
+    <div class="order-container">
+        <!-- 1. Tiêu đề đơn hàng -->
+        <section class="order-header">
+            <h2>Đơn hàng <span>#@donHang.MaDH</span></h2>
+            <p class="order-date">
+                Ngày đặt hàng
+                <strong>
+                    @donHang.NgayTao.ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+                </strong>
+            </p>        </section>
+        <!-- 4. Địa chỉ giao hàng -->
+        <section class="order-info">
+            <div class="order-address">
+                <p><strong>Người nhận</strong></p>
+                <p>@donHang.NguoiNhan - @donHang.SDTNguoiNhan</p>
+                <p><strong>Địa chỉ giao hàng</strong></p>
+                <p>@donHang.DiaChiGiao</p>
+            </div>
+        </section>
+        <!-- 3. Trạng thái đơn hàng -->
+        <section class="order-status">
+            <p>
+                Dự tính giao vào
+                <strong>
+                    @donHang.NgayTao.AddDays(3).ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+                </strong>
+            </p>
+
+            @{
+                var percent = 0;
+                switch (donHang.TrangThai)
+                {
+                    case "Xác nhận đơn":
+                        percent = 3;
+                        break;
+                    case "Chuẩn bị hàng":
+                        percent = 35;
+                        break;
+                    case "Đang giao":
+                        percent = 66;
+                        break;
+                    case "Hoàn thành":
+                        percent = 100;
+                        break;
+                }
+            }
+            <div class="order-progress-bar">
+                <div class="order-progress" style="width: @percent%"></div>
+            </div>
+
+
+            <div class="order-steps">
+                <span class="@(donHang.TrangThai == "Xác nhận đơn" || donHang.TrangThai == "Chuẩn bị hàng" || donHang.TrangThai == "Đang giao" || donHang.TrangThai == "Hoàn thành" ? "active" : "")">
+                    Xác nhận đơn
+                </span>
+                <span class="@(donHang.TrangThai == "Chuẩn bị hàng" || donHang.TrangThai == "Đang giao" || donHang.TrangThai == "Hoàn thành" ? "active" : "")">
+                    Chuẩn bị hàng
+                </span>
+                <span class="@(donHang.TrangThai == "Đang giao" || donHang.TrangThai == "Hoàn thành" ? "active" : "")">
+                    Đang giao
+                </span>
+                <span class="@(donHang.TrangThai == "Hoàn thành" ? "active" : "")">
+                    Hoàn thành
+                </span>
+            </div>
+
+        </section>
+        <!-- 2. Danh sách sản phẩm trong đơn hàng -->
+        <section class="order-products">
+            <div class="order-card-list">
+                @{
+                    var chiTietList = donHang.ChiTietDonHangs.ToList();
+                }
+                @for (int i = 0; i < chiTietList.Count; i++)
+                {
+                    var sp = chiTietList[i];
+                    var isHidden = i >= 3 ? "hidden" : "";
+
+                    <div class="order-card @isHidden">
+                        <div class="order-row">
+                            <!-- Cột 1: Ảnh -->
+                            <div class="order-col image-col">
+                                <img src="@sp.SanPham.AnhSP" />
+                            </div>
+
+                            <!-- Cột 2: Tên + Giá -->
+                            <div class="order-col">
+                                <h3>@sp.TenSP</h3>
+                                <p>@sp.GiaSP.Value.ToString("#,##0") VNĐ</p>
+                            </div>
+
+                            <!-- Cột 3: Số lượng -->
+                            <div class="order-col">
+                                <p>Số lượng<br /> @sp.SoLuong</p>
+                            </div>
+
+                            <!-- Cột 4: Thành tiền -->
+                            <div class="order-col">
+                                <p>Thành tiền <br /> @(sp.SoLuong * sp.GiaSP.Value)  VNĐ</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                }
+            </div>
+
+            @if (chiTietList.Count > 3)
+            {
+                <div class="toggle-button-wrapper">
+                    <button onclick="toggleCards(this)" class="toggle-btn">Xem thêm sản phẩm ▼</button>
+                </div>
+            }
+        </section>
+
+
+
+
+
+        <!-- 5. Thanh toán và tổng tiền -->
+        <section class="order-summary">
+            <div class="order-payment">
+                <p><strong>Phương thức thanh toán</strong></p>
+                <div class="order-card-info">
+                    <span>@donHang.PhuongThucThanhToan</span>
+                </div>
+
+                @if (donHang.PhuongThucThanhToan == "PayPal")
+                {
+                    <p>Đã thanh toán</p>
+                }
+                else if (donHang.PhuongThucThanhToan == "COD")
+                {
+                    if (donHang.NgayThanhToan != null)
+                    {
+                        <p>Đã thanh toán</p>
+                    }
+                    else
+                    {
+                        <p>Chưa thanh toán</p>
+                    }
+                }
+
+                @if (donHang.TrangThai == "Hoàn thành")
+                {
+                    var ngayGiao = donHang.ChiTietDonHangs.FirstOrDefault()?.Ngaygiao;
+                    if (ngayGiao != null)
+                    {
+                        <p><strong>Đã giao:</strong> @ngayGiao</p>
+                    }
+                    else
+                    {
+                        <p><strong>Đã giao:</strong> (Không có thông tin ngày giao)</p>
+                    }
+                }
+            </div>
+
+
+
+            <div class="order-total-section">
+                <table>
+                    <tr>
+                        <td>Số lượng sản phẩm</td>
+                        <td>@chiTietList.Sum(c => c.SoLuong)</td>
+                    </tr>
+                    <tr>
+                        <td>Phí vận chuyển: </td>
+                        <td>@donHang.PhiVanChuyen VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td class="order-total-row">Tổng cộng</td>
+                        <td class="order-total-row">@((donHang.TongTien ?? 0).ToString("#,##0")) VNĐ</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+}
+
+
+@if (Model.Count > 3)
+{
+    <div class="toggle-button-wrapper">
+        <button onclick="toggleCards(this)" class="toggle-btn">Xem thêm sản phẩm ▼</button>
+    </div>
+}
+
+<script>
+    function toggleCards(btn) {
+        var orderContainer = btn.closest('.order-container');
+        var hiddenCards = orderContainer.querySelectorAll('.order-card.hidden');
+        var isShown = hiddenCards.length && hiddenCards[0].style.display === "flex";
+
+        hiddenCards.forEach(function (card) {
+            card.style.display = isShown ? "none" : "flex";
+        });
+
+        btn.textContent = isShown ? "Xem thêm sản phẩm ▼" : "Ẩn bớt ▲";
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var hiddenCards = document.querySelectorAll('.order-card.hidden');
+        hiddenCards.forEach(function (card) {
+            card.style.display = "none";
+        });
+    });
+</script>
+
+<style>
+    .order-details .quantity {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .order-container {
+        max-width: 1220px;
+        margin: 190px auto 20px;
+        background-color: #f9f9fb;
+        font-family: Arial, sans-serif;
+        color: #333;
+        padding: 24px 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+
+    .order-header {
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+        .order-header h2 {
+            font-size: 26px;
+            margin: 0;
+        }
+
+        .order-header span {
+            color: #81c408;
+        }
+
+    .order-date {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+    }
+
+    .order-products {
+        margin-bottom: 30px;
+    }
+
+    .order-card-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .order-card {
+        display: flex;
+        background: #f7f7fc;
+        border-radius: 8px;
+        padding: 12px;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        transition: box-shadow 0.3s ease;
+    }
+
+        .order-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .order-product {
+        flex: 0 0 100px;
+        max-width: 100px;
+    }
+
+        .order-product img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+    .order-details {
+        flex: 1;
+        min-width: 220px;
+        margin-left: 50px;
+    }
+
+        .order-details h3 {
+            margin: 0 0 6px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+    .price {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #2c7a0f;
+    }
+
+    .desc {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .toggle-button-wrapper {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    button.toggle-btn {
+        background-color: #81c408;
+        color: white;
+        padding: 10px 22px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+        button.toggle-btn:hover {
+            background-color: #6aa205;
+        }
+
+    .order-status {
+        margin-bottom: 30px;
+        padding: 16px;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+    }
+
+        .order-status p {
+            margin: 8px 0 12px;
+            font-size: 15px;
+        }
+
+    .order-progress-bar {
+        background: #e0e0e0;
+        height: 8px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .order-progress {
+        background: #81c408;
+        height: 100%;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+
+    .order-steps {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        margin-top: 5px;
+        color: #aaa;
+        font-weight: 500;
+    }
+
+        .order-steps span.active {
+            color: #81c408;
+            font-weight: 700;
+        }
+
+    .order-info {
+        margin-bottom: 30px;
+        background-color: #f5f5f5;
+        padding: 16px;
+        border-radius: 8px;
+    }
+
+    .order-address p {
+        margin: 6px 0;
+        font-size: 14px;
+        color: #444;
+    }
+
+    .order-summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .order-payment, .order-total-section {
+        background: white;
+        padding: 18px 20px;
+        border-radius: 8px;
+        flex: 1 1 280px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+        .order-payment p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+    .order-card-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+    }
+
+    .order-card-logo {
+        width: 40px;
+    }
+
+    .order-total-section table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .order-total-section td {
+        padding: 8px 0;
+        font-size: 15px;
+    }
+
+    .order-total-section .order-total-row {
+        font-weight: bold;
+        color: #81c408;
+        font-size: 18px;
+    }
+
+    .order-card.hidden {
+        display: none;
+    }
+
+    .order-row {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .order-col {
+        flex: 1;
+        padding: 0 10px;
+        background: none;
+        border: none;
+    }
+
+    .image-col {
+        flex: 0 0 100px;
+    }
+
+        .image-col img {
+            width: 100%;
+            max-width: 100px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 0;
+        }
+
+    .order-progress-bar {
+        background-color: #e0e0e0;
+        border-radius: 8px;
+        height: 12px;
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .order-progress {
+        background-color: #4caf50;
+        height: 100%;
+        border-radius: 8px;
+        transition: width 0.5s;
+    }
+</style>
+
