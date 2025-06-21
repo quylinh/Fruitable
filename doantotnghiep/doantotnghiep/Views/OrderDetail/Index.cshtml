@@ -6,6 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.active = 4;
 }
+<<<<<<< HEAD
+=======
+@using System.Globalization
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 
 @foreach (var donHang in Model)
 {
@@ -13,8 +17,17 @@
         <!-- 1. Tiêu đề đơn hàng -->
         <section class="order-header">
             <h2>Đơn hàng <span>#@donHang.MaDH</span></h2>
+<<<<<<< HEAD
             <p class="order-date">Ngày đặt hàng <strong>@donHang.NgayTao.ToString("dd MMMM, yyyy")</strong></p>
         </section>
+=======
+            <p class="order-date">
+                Ngày đặt hàng
+                <strong>
+                    @donHang.NgayTao.ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+                </strong>
+            </p>        </section>
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
         <!-- 4. Địa chỉ giao hàng -->
         <section class="order-info">
             <div class="order-address">
@@ -26,8 +39,17 @@
         </section>
         <!-- 3. Trạng thái đơn hàng -->
         <section class="order-status">
+<<<<<<< HEAD
             <p>Đang chuẩn bị giao vào <strong>@donHang.NgayTao.AddDays(3).ToString("dd MMMM, yyyy")</strong></p>
 
+=======
+            <p>
+                Dự tính giao vào
+                <strong>
+                    @donHang.NgayTao.AddDays(3).ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+                </strong>
+            </p>
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 
             @{
                 var percent = 0;
@@ -128,9 +150,45 @@
                 <div class="order-card-info">
                     <span>@donHang.PhuongThucThanhToan</span>
                 </div>
+<<<<<<< HEAD
                 <p>Đã thanh toán</p>
             </div>
 
+=======
+
+                @if (donHang.PhuongThucThanhToan == "PayPal")
+                {
+                    <p>Đã thanh toán</p>
+                }
+                else if (donHang.PhuongThucThanhToan == "COD")
+                {
+                    if (donHang.NgayThanhToan != null)
+                    {
+                        <p>Đã thanh toán</p>
+                    }
+                    else
+                    {
+                        <p>Chưa thanh toán</p>
+                    }
+                }
+
+                @if (donHang.TrangThai == "Hoàn thành")
+                {
+                    var ngayGiao = donHang.ChiTietDonHangs.FirstOrDefault()?.Ngaygiao;
+                    if (ngayGiao != null)
+                    {
+                        <p><strong>Đã giao:</strong> @ngayGiao</p>
+                    }
+                    else
+                    {
+                        <p><strong>Đã giao:</strong> (Không có thông tin ngày giao)</p>
+                    }
+                }
+            </div>
+
+
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
             <div class="order-total-section">
                 <table>
                     <tr>
@@ -433,6 +491,10 @@
             object-fit: cover;
             border-radius: 0;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     .order-progress-bar {
         background-color: #e0e0e0;
         border-radius: 8px;
@@ -447,6 +509,9 @@
         border-radius: 8px;
         transition: width 0.5s;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 </style>
 

@@ -18,11 +18,18 @@ namespace doantotnghiep.Models
         public int MaDH { get; set; }
         public int MaSP { get; set; }
         public int TongTien { get; set; }
+<<<<<<< HEAD
         public Nullable<System.DateTime> Ngaygiao { get; set; }
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
         public Nullable<int> SoLuong { get; set; }
         public Nullable<int> GiaSP { get; set; }
         public string TenSP { get; set; }
         public Nullable<int> MaKH { get; set; }
+<<<<<<< HEAD
+=======
+        public Nullable<System.DateTime> Ngaygiao { get; set; }
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     
         public virtual Account_KhachHang Account_KhachHang { get; set; }
         public virtual DonHang DonHang { get; set; }

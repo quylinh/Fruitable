@@ -28,7 +28,10 @@ namespace doantotnghiep.Models
         }
     
         public virtual DbSet<Account_KhachHang> Account_KhachHang { get; set; }
+<<<<<<< HEAD
         public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
         public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
         public virtual DbSet<DanhMucSP> DanhMucSPs { get; set; }
         public virtual DbSet<DonHang> DonHangs { get; set; }
@@ -39,6 +42,10 @@ namespace doantotnghiep.Models
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ChiTietDonHangView> ChiTietDonHangViews { get; set; }
+<<<<<<< HEAD
+=======
+        public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

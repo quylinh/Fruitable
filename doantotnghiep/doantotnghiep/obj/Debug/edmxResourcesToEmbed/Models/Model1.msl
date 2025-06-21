@@ -16,6 +16,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+<<<<<<< HEAD
     <EntitySetMapping Name="ChiTietDonHangs">
       <EntityTypeMapping TypeName="FreshFruitDBModel.ChiTietDonHang">
         <MappingFragment StoreEntitySet="ChiTietDonHang">
@@ -31,6 +32,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <EntitySetMapping Name="ChiTietGioHangs">
       <EntityTypeMapping TypeName="FreshFruitDBModel.ChiTietGioHang">
         <MappingFragment StoreEntitySet="ChiTietGioHang">
@@ -176,5 +179,23 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FreshFruitDBModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FreshFruitDBModel.Store.sp_upgraddiagrams" />
+<<<<<<< HEAD
+=======
+    <EntitySetMapping Name="ChiTietDonHangs">
+      <EntityTypeMapping TypeName="FreshFruitDBModel.ChiTietDonHang">
+        <MappingFragment StoreEntitySet="ChiTietDonHang">
+          <ScalarProperty Name="Ngaygiao" ColumnName="Ngaygiao" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="GiaSP" ColumnName="GiaSP" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+          <ScalarProperty Name="MaCTDH" ColumnName="MaCTDH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
   </EntityContainerMapping>
 </Mapping>

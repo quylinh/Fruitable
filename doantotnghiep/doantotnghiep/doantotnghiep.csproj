@@ -419,7 +419,10 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminNhapHuyHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminOrderController.cs" />
+<<<<<<< HEAD
     <Compile Include="Areas\Admin\Controllers\AdminQuanLyDonHangController.cs" />
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <Compile Include="Areas\Admin\Controllers\AdminSanPhamController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckOutController.cs" />
@@ -429,6 +432,10 @@
     <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\ShopDetailController.cs" />
     <Compile Include="Controllers\TestimonialController.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Controllers\UpdateInforController.cs" />
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -817,8 +824,11 @@
     <Content Include="Areas\Admin\Views\AdminSanPham\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\AdminSanPham\Delete.cshtml" />
     <Content Include=".editorconfig" />
+<<<<<<< HEAD
     <Content Include="Areas\Admin\Views\AdminQuanLyDonHang\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminQuanLyDonHang\Detail.cshtml" />
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <Content Include="Areas\Admin\Views\AdminOrder\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminNhapHuyHang\NhapHang.cshtml" />
     <Content Include="Areas\Admin\Views\AdminNhapHuyHang\HuyHang.cshtml" />
@@ -843,6 +853,10 @@
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\CheckOut\FailureView.cshtml" />
     <Content Include="Views\CheckOut\SuccessView.cshtml" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\UpdateInfor\Index.cshtml" />
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

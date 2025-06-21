@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CoreCompileInputs.cache
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\doantotnghiep.dll.config
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\doantotnghiep.dll
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\doantotnghiep.pdb
@@ -75,7 +78,15 @@ C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\Sys
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Webpages.Razor.xml
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Helpers.xml
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Mvc.xml
+<<<<<<< HEAD
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CopyComplete
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.dll
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.pdb
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.AssemblyReference.cache
+=======
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.AssemblyReference.cache
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CoreCompileInputs.cache
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CopyComplete
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.dll
+C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.pdb
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee

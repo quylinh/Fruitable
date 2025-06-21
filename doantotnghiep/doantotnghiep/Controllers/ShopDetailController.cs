@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿/*using doantotnghiep.Models;
 using System;
 using System.Linq;
@@ -84,10 +85,17 @@ namespace doantotnghiep.Controllers
 */
 
 using doantotnghiep.Models;
+=======
+﻿using doantotnghiep.Models;
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Data.Entity;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 namespace doantotnghiep.Controllers
 {
     public class ShopDetailController : Controller
@@ -113,6 +121,15 @@ namespace doantotnghiep.Controllers
                 }
             }
 
+<<<<<<< HEAD
+=======
+            ViewBag.SoLuongNhietDoi = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Nhiệt đới");
+            ViewBag.SoLuongOnDoi = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Ôn đới");
+            ViewBag.SoLuongCamQuyt = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Họ cam quýt");
+            ViewBag.SoLuongNhapKhau = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Nhập khẩu");
+
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
             if (Session["UserID"] != null)
             {
                 int userId = (int)Session["UserID"];
@@ -125,10 +142,27 @@ namespace doantotnghiep.Controllers
 
             return View(sp);
         }
+<<<<<<< HEAD
     
             
 
         
+=======
+
+        // Nếu dùng partial riêng cho sidebar thì gọi bằng Html.Partial
+        public PartialViewResult DanhMucSidebar()
+        {
+            var danhMucs = db.DanhMucSPs
+                .Select(dm => new {
+                    TenDM = dm.TenDM,
+                    MaDM = dm.MaDM,
+                    SoLuongSP = db.SanPhams.Count(sp => sp.MaDM == dm.MaDM)
+                }).ToList();
+
+            ViewBag.DanhMucs = danhMucs;
+            return PartialView();
+        }
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 
         [HttpPost]
         public ActionResult ThemNhanXet(int maSP, string noiDung, int soSao)
@@ -171,6 +205,9 @@ namespace doantotnghiep.Controllers
         }
     }
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee

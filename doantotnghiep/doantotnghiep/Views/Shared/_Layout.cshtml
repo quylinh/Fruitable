@@ -149,26 +149,47 @@
                         @*<a href="@Url.Action("Index","LoginSignup")" class="my-auto">
             <i class="fas fa-user fa-2x"></i>
         </a>*@
+<<<<<<< HEAD
                         <div class="user-hover-container position-relative d-inline-block"style="margin-top: 6px" >
                             @if (Session["UserName"] != null)
                             {
                                 <span class="my-auto ">Xin chào <br /><strong>@Session["UserName"]</strong></span>
 
                                 <div class="user-hover-box" style="margin-top:5px" >
+=======
+                        <div class="user-hover-container position-relative d-inline-block" style="margin-top: 6px">
+                            @if (Session["UserName"] != null)
+                            {
+                                <a href="@Url.Action("Index", "UpdateInfor")" class="my-auto text-decoration-none text-dark">
+                                    Xin chào <br /><strong>@Session["UserName"]</strong>
+                                </a>
+
+                                <div class="user-hover-box" style="margin-top:5px">
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
                                     <a href="@Url.Action("Logout", "LoginSignup")">Đăng xuất</a>
                                 </div>
                             }
                             else
                             {
                                 <a href="#" class="my-auto">
+<<<<<<< HEAD
                                     <i class="fas fa-user fa-2x "></i>
                                 </a>
                                 <div class="user-hover-box" @*style="margin-bottom: 8px"*@>
+=======
+                                    <i class="fas fa-user fa-2x"></i>
+                                </a>
+                                <div class="user-hover-box">
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
                                     <a href="@Url.Action("Index", "LoginSignup")">Đăng nhập</a>
                                 </div>
                             }
                         </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
                     </div>
                 </div>
             </nav>

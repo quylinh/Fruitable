@@ -34,7 +34,14 @@ namespace doantotnghiep.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Không có quyền truy cập." });
             }
 
+<<<<<<< HEAD
             var donHang = db.DonHangs.Find(maDH);
+=======
+            var donHang = db.DonHangs
+                            .Include("ChiTietDonHangs") // Load luôn danh sách ChiTietDonHang
+                            .FirstOrDefault(d => d.MaDH == maDH);
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
             if (donHang != null)
             {
                 donHang.TrangThai = trangThaiMoi;
@@ -43,6 +50,16 @@ namespace doantotnghiep.Areas.Admin.Controllers
                 {
                     donHang.NgayThanhToan = DateTime.Now;
                     db.Entry(donHang).Property(x => x.NgayThanhToan).IsModified = true;
+<<<<<<< HEAD
+=======
+
+                    // Cập nhật Ngaygiao cho từng ChiTietDonHang của đơn hàng này
+                    foreach (var ct in donHang.ChiTietDonHangs)
+                    {
+                        ct.Ngaygiao = DateTime.Now;
+                        db.Entry(ct).Property(x => x.Ngaygiao).IsModified = true;
+                    }
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
                 }
 
                 try
@@ -59,5 +76,9 @@ namespace doantotnghiep.Areas.Admin.Controllers
             return Json(new { success = false, message = "Không tìm thấy đơn hàng." });
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     }
 }

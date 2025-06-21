@@ -214,9 +214,15 @@ namespace doantotnghiep.Controllers
                 DiaChiGiao = customerAddress,
                 NguoiNhan = customerName,
                 SDTNguoiNhan= customerPhone,
+<<<<<<< HEAD
                 PhiVanChuyen = (int?)phiShip
 
         };
+=======
+                PhiVanChuyen = (int?)phiShip,
+
+            };
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 
             db.DonHangs.Add(donHang);
             db.SaveChanges();
@@ -231,8 +237,13 @@ namespace doantotnghiep.Controllers
                     SoLuong = item.SoLuong,
                     GiaSP = item.SanPham.GiaSP,
                     TongTien = item.SoLuong * item.SanPham.GiaSP,
+<<<<<<< HEAD
                     Ngaygiao = null,
                     TenSP = item.SanPham.TenSP,
+=======
+                    TenSP = item.SanPham.TenSP,
+                    Ngaygiao = null
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
                 };
                 db.ChiTietDonHangs.Add(chiTietDonHang);
             }
@@ -433,7 +444,35 @@ namespace doantotnghiep.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
        
+=======
+
+        [HttpPost]
+        public ActionResult CapNhatTrangThai(int maDH, string trangThai)
+        {
+            var donHang = db.DonHangs.FirstOrDefault(d => d.MaDH == maDH);
+
+            if (donHang != null)
+            {
+                donHang.TrangThai = trangThai;
+
+                // Nếu đơn hàng đã "Thành công"
+                if (trangThai == "Hoàn thành")
+                {
+                    if (donHang.PhuongThucThanhToan == "COD" && donHang.NgayThanhToan == null)
+                    {
+                        donHang.NgayThanhToan = DateTime.Now;
+                    }
+                    // Với PayPal thì NgayThanhToan đã được gán ở lúc thanh toán nên không làm gì
+                }
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("DanhSachDonHang");
+        }
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
 
     }
 }

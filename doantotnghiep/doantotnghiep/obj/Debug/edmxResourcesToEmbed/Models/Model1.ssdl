@@ -22,11 +22,18 @@
     <Property Name="MaDH" Type="int" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
     <Property Name="TongTien" Type="int" Nullable="false" />
+<<<<<<< HEAD
     <Property Name="Ngaygiao" Type="date" />
+=======
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
     <Property Name="SoLuong" Type="int" />
     <Property Name="GiaSP" Type="int" />
     <Property Name="TenSP" Type="nvarchar" MaxLength="255" />
     <Property Name="MaKH" Type="int" />
+<<<<<<< HEAD
+=======
+    <Property Name="Ngaygiao" Type="datetime" />
+>>>>>>> 997f9b8680ef12397472517faa815b8e795d0eee
   </EntityType>
   <EntityType Name="ChiTietGioHang">
     <Key>
