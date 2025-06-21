@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.active = 4;
+}
+
+@model List<doantotnghiep.Models.NhanXetSanPham>
+
+<style>
+    body {
+        background: #f9fafb;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Khung chứa từng testimonial */
+    .testimonial-item {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        padding: 20px;
+        transition: transform 0.3s ease;
+        cursor: default;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        min-height: 180px;
+    }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+    /* Phần nội dung chính (trích dẫn) */
+    .testimonial-content {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 10px;
+    }
+
+        .testimonial-content .quote-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 28px;
+            color: #bbb;
+        }
+
+    .testimonial-text {
+        font-style: italic;
+        color: #444;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    /* Phần thông tin khách hàng và sản phẩm */
+    .testimonial-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+        margin-top: 10px;
+    }
+
+    .testimonial-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    }
+
+    .testimonial-info {
+        flex: 1;
+    }
+
+        .testimonial-info h4 {
+            margin: 0 0 5px;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .testimonial-info p {
+            margin: 0 0 5px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+    .stars i {
+        color: #f5a623;
+        margin-right: 3px;
+        font-size: 1rem;
+    }
+
+    .testimonial-date {
+        font-size: 0.85rem;
+        color: #777;
+        margin-top: 5px;
+    }
+
+    /* Owl Carousel */
+    .owl-carousel .testimonial-item {
+        margin: 0 10px;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="text-center mb-5" style="margin-top:150px">
+        <h4 class="text-primary">Đánh giá về chúng tôi</h4>
+        <h1 class="display-5 text-dark">Khách hàng của chúng tôi nói gì!</h1>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="owl-carousel owl-theme">
+            @foreach (var item in Model)
+            {
+                <div class="testimonial-item">
+                    <!-- Phần nội dung trích dẫn -->
+                    <div class="testimonial-content">
+                        <i class="fa fa-quote-right quote-icon"></i>
+                        <p class="testimonial-text" title="@item.NoiDung">@item.NoiDung</p>
+                    </div>
+
+                    <!-- Phần thông tin khách hàng & sản phẩm -->
+                    <div class="testimonial-meta">
+                        <div class="testimonial-img-wrapper">
+                            <img src="@item.SanPham.AnhSP"
+                                 alt="@item.SanPham.TenSP"
+                                 class="testimonial-img" />
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>@item.Account_KhachHang.TaiKhoan</h4>
+                            <p>@item.SanPham.TenSP</p>
+                            <div class="stars">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= (item?.SoSao ?? 0))
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fas fa-star" style="color:#ddd;"></i>
+                                    }
+                                }
+                            </div>
+                            <div class="testimonial-date">
+                                @(item.NgayNhanXet.HasValue ? item.NgayNhanXet.Value.ToString("dd/MM/yyyy") : "Không có ngày")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-center text-muted">Chưa có nhận xét nào.</p>
+    }
+</div>
+
+@section Scripts {
+    <!-- Dùng CDN để đảm bảo load được -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                margin: 15,
+                nav: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: { items: 1 },
+                    768: { items: 2 },
+                    1200: { items: 2 }
+                }
+            });
+        });
+    </script>
+}

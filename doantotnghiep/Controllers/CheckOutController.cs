@@ -213,10 +213,10 @@ namespace doantotnghiep.Controllers
                 TongTien = tongTien,
                 DiaChiGiao = customerAddress,
                 NguoiNhan = customerName,
-                SDTNguoiNhan= customerPhone,
+                SDTNguoiNhan = customerPhone,
                 PhiVanChuyen = (int?)phiShip
 
-        };
+            };
 
             db.DonHangs.Add(donHang);
             db.SaveChanges();
@@ -243,7 +243,7 @@ namespace doantotnghiep.Controllers
 
             if (paymentMethod == "COD")
             {
-               
+
                 return Json(new { success = true, message = "Đặt hàng thành công! Vui lòng chuẩn bị tiền khi nhận hàng." });
             }
 
@@ -433,7 +433,7 @@ namespace doantotnghiep.Controllers
         {
             return View();
         }
-       
+
 
     }
 }

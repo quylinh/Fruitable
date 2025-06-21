@@ -1,0 +1,59 @@
+﻿@model doantotnghiep.Models.HuyHang
+
+@{
+    ViewBag.Title = "Hủy hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Hủy hàng</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label for="MaSP" class="form-label">Mã sản phẩm</label>
+        <select id="MaSP" name="MaSP" class="form-select">
+            <option value="">-- Chọn sản phẩm --</option>
+            @if (ViewBag.MaSP != null)
+            {
+                foreach (var item in (SelectList)ViewBag.MaSP)
+                {
+                    <option value="@item.Value" @(Model != null && Model.MaSP == Convert.ToInt32(item.Value) ? "selected" : "")>@item.Text</option>
+                }
+
+            }
+        </select>
+        @if (ViewData.ModelState?["MaSP"]?.Errors?.Count > 0)
+        {
+            <span class="text-danger">@ViewData.ModelState["MaSP"].Errors[0].ErrorMessage</span>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label for="SoLuongHuy" class="form-label">Số lượng hủy</label>
+        <input type="number" id="SoLuongHuy" name="SoLuongHuy" class="form-control" placeholder="Nhập số lượng cần hủy" value="@(Model != null ? Model.SoLuongHuy.ToString() : "")" />
+        @if (ViewData.ModelState?["SoLuongHuy"]?.Errors?.Count > 0)
+        {
+            <span class="text-danger">@ViewData.ModelState["SoLuongHuy"].Errors[0].ErrorMessage</span>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label for="LyDoHuy" class="form-label">Lý do hủy</label>
+        <textarea id="LyDoHuy" name="LyDoHuy" rows="4" class="form-control" placeholder="Nhập lý do hủy hàng...">@(Model != null ? Model.LyDoHuy : "")</textarea>
+        @if (ViewData.ModelState?["LyDoHuy"]?.Errors?.Count > 0)
+        {
+            <span class="text-danger">@ViewData.ModelState["LyDoHuy"].Errors[0].ErrorMessage</span>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-danger px-4">Hủy hàng</button>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-4" role="alert">
+        @TempData["Success"]
+    </div>
+}

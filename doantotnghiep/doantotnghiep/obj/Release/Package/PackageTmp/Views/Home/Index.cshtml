@@ -1,0 +1,818 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.active = 1;
+}
+@model IEnumerable<doantotnghiep.Models.SanPham>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+    .product-item {
+        transition: all 0.3s ease;
+    }
+
+    keyframes pulse {
+        0%
+
+    {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+    }
+</style>
+<!-- Modal Search Start -->
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex align-items-center">
+                <div class="input-group w-75 mx-auto d-flex">
+                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1" id="modalSearchInput">
+                    <span id="search-icon-1" class="input-group-text p-3 cursor-pointer" onclick="performModalSearch()"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Search End -->
+<!-- Hero Start -->
+<div class="container-fluid py-5 mb-5 hero-header">
+    <div class="container py-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-12 col-lg-7">
+                <h4 class="mb-3 text-secondary">100% Trái cây hữu cơ</h4>
+                <h1 class="mb-5 display-3 text-primary">Chọn trái cây hữu cơ Chọn sức khỏe</h1>
+                <div class="position-relative mx-auto">
+                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" placeholder="Tìm kiếm" id="heroSearchInput">
+                    <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;" onclick="performHeroSearch()">Tìm kiếm ngay</button>
+                </div>
+                <!-- Search Results Message -->
+                <div id="searchMessage" class="mt-3" style="display: none;">
+                    <div class="alert alert-info" role="alert">
+                        <span id="searchMessageText"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-5">
+                <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active rounded">
+                            <img src="~/Asset/img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                            <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                        </div>
+                        <div class="carousel-item rounded">
+                            <img src="~/Asset/img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+<!-- Featurs Section Start -->
+<div class="container-fluid featurs py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded bg-light p-4">
+                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                        <i class="fas fa-car-side fa-3x text-white"></i>
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Miễn phí vận chuyển</h5>
+                        <p class="mb-0">Đơn hàng từ 200.000VND trở lên</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded bg-light p-4">
+                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                        <i class="fas fa-user-shield fa-3x text-white"></i>
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Bảo mật thanh toán </h5>
+                        <p class="mb-0">Thanh toán an toàn 100%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded bg-light p-4">
+                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                        <i class="fas fa-exchange-alt fa-3x text-white"></i>
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Chính sách đổi trả 30 ngày</h5>
+                        <p class="mb-0">Hoàn tiền trong vòng 30 ngày</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="featurs-item text-center rounded bg-light p-4">
+                    <div class="featurs-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
+                        <i class="fa fa-phone-alt fa-3x text-white"></i>
+                    </div>
+                    <div class="featurs-content text-center">
+                        <h5>Hỗ trợ 24/7</h5>
+                        <p class="mb-0">Hỗ trợ nhanh, mọi thời điểm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featurs Section End -->
+<!-- Fruits Shop Start-->
+<div class="container-fluid fruite py-5" id="productsSection">
+    <div class="container py-5">
+        <div class="tab-class text-center">
+            <div class="row g-4">
+                <div class="col-lg-4 text-start">
+                    <h1>Trái cây hữu cơ</h1>
+                </div>
+                <div class="col-lg-8 text-end">
+                    <ul class="nav nav-pills d-inline-flex text-center mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
+                                <span class="text-dark" style="width: 130px;">Tất cả</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-2">
+                                <span class="text-dark" style="width: 130px;">Nhiệt đới</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-3">
+                                <span class="text-dark" style="width: 130px;">Ôn đới</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-4">
+                                <span class="text-dark" style="width: 130px;">Họ cam quýt</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill" href="#tab-5">
+                                <span class="text-dark" style="width: 130px;">Nhập khẩu</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div id="tab-1" class="tab-pane fade show p-0 active">
+                    <div class="row g-4" id="allProductsContainer">
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3 product-item" data-product-id="@item.MaSP" data-product-name="@item.TenSP.ToLower()" data-product-description="@item.MotaSP.ToLower()">
+                                    <div class="border border-secondary rounded h-100 d-flex flex-column overflow-hidden">
+                                        <div class="fruite-img">
+                                            <a href="@Url.Action("Index", "ShopDetail", new { id = item.MaSP })">
+                                                <img src="@Url.Content(item.AnhSP)" class="img-fluid w-100" alt="@item.TenSP" style="object-fit: cover; height: 250px;" />
+                                            </a>
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 position-absolute rounded" style="top: 10px; left: 10px;">Fruits</div>
+                                        <div class="p-4 d-flex flex-column flex-grow-1">
+                                            <h4>
+                                                <a href="@Url.Action("Index", "ShopDetail", new { id = item.MaSP })" class="text-decoration-none text-dark">
+                                                    @item.TenSP
+                                                </a>
+                                            </h4>
+                                            <p class="flex-grow-1">@item.MotaSP</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
+                                                <p class="text-dark fs-5 fw-bold mb-0" style="margin-bottom:4px!important">@item.GiaSP.ToString("N0") ₫ / kg</p>
+                                                <a href="javascript:void(0);"
+                                                   class="btn border border-secondary rounded-pill px-3 text-primary add-to-cart-btn"
+                                                   data-id="@item.MaSP">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <p class="text-center text-danger">Không có sản phẩm nào.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div id="tab-2" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        @if (Model != null && Model.Any(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Nhiệt đới"))
+                        {
+                            foreach (var item in Model.Where(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Nhiệt đới"))
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="border border-secondary rounded h-100 d-flex flex-column overflow-hidden">
+                                        <div class="fruite-img">
+                                            <img src="@Url.Content(item.AnhSP)" class="img-fluid w-100" alt="@item.TenSP" style="object-fit: cover; height: 250px;" />
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 position-absolute rounded" style="top: 10px; left: 10px;">Fruits</div>
+                                        <div class="p-4 d-flex flex-column flex-grow-1">
+                                            <h4>@item.TenSP</h4>
+                                            <p class="flex-grow-1">@item.MotaSP</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
+                                                <p class="text-dark fs-5 fw-bold mb-0" style="margin-bottom:4px!important">@item.GiaSP.ToString("N0") ₫ / kg</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <p class="text-center text-danger">Không có sản phẩm nào thuộc danh mục Nhiệt đới.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div id="tab-3" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        @if (Model != null && Model.Any(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Ôn đới"))
+                        {
+                            foreach (var item in Model.Where(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Ôn đới"))
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="border border-secondary rounded h-100 d-flex flex-column overflow-hidden">
+                                        <div class="fruite-img">
+                                            <img src="@Url.Content(item.AnhSP)" class="img-fluid w-100" alt="@item.TenSP" style="object-fit: cover; height: 250px;" />
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 position-absolute rounded" style="top: 10px; left: 10px;">Fruits</div>
+                                        <div class="p-4 d-flex flex-column flex-grow-1">
+                                            <h4>@item.TenSP</h4>
+                                            <p class="flex-grow-1">@item.MotaSP</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
+                                                <p class="text-dark fs-5 fw-bold mb-0" style="margin-bottom:4px!important">@item.GiaSP.ToString("N0") ₫ / kg</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <p class="text-center text-danger">Không có sản phẩm nào thuộc danh mục Nhiệt đới.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div id="tab-4" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        @if (Model != null && Model.Any(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Họ cam quýt"))
+                        {
+                            foreach (var item in Model.Where(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Họ cam quýt"))
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="border border-secondary rounded h-100 d-flex flex-column overflow-hidden">
+                                        <div class="fruite-img">
+                                            <img src="@Url.Content(item.AnhSP)" class="img-fluid w-100" alt="@item.TenSP" style="object-fit: cover; height: 250px;" />
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 position-absolute rounded" style="top: 10px; left: 10px;">Fruits</div>
+                                        <div class="p-4 d-flex flex-column flex-grow-1">
+                                            <h4>@item.TenSP</h4>
+                                            <p class="flex-grow-1">@item.MotaSP</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
+                                                <p class="text-dark fs-5 fw-bold mb-0" style="margin-bottom:4px!important">@item.GiaSP.ToString("N0") ₫ / kg</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <p class="text-center text-danger">Không có sản phẩm nào thuộc danh mục Nhiệt đới.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div id="tab-5" class="tab-pane fade show p-0">
+                    <div class="row g-4">
+                        @if (Model != null && Model.Any(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Nhập khẩu"))
+                        {
+                            foreach (var item in Model.Where(x => x.DanhMucSP != null && x.DanhMucSP.TenDM == "Nhập khẩu"))
+                            {
+                                <div class="col-md-6 col-lg-4 col-xl-3">
+                                    <div class="border border-secondary rounded h-100 d-flex flex-column overflow-hidden">
+                                        <div class="fruite-img">
+                                            <img src="@Url.Content(item.AnhSP)" class="img-fluid w-100" alt="@item.TenSP" style="object-fit: cover; height: 250px;" />
+                                        </div>
+                                        <div class="text-white bg-secondary px-3 py-1 position-absolute rounded" style="top: 10px; left: 10px;">Fruits</div>
+                                        <div class="p-4 d-flex flex-column flex-grow-1">
+                                            <h4>@item.TenSP</h4>
+                                            <p class="flex-grow-1">@item.MotaSP</p>
+                                            <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
+                                                <p class="text-dark fs-5 fw-bold mb-0" style="margin-bottom:4px!important">@item.GiaSP.ToString("N0") ₫ / kg</p>
+                                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                <p class="text-center text-danger">Không có sản phẩm nào thuộc danh mục Nhiệt đới.</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fruits Shop End-->
+<!-- Featurs Start -->
+<div class="container-fluid service py-5">
+    <div class="container py-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <a href="#">
+                    <div class="service-item bg-secondary rounded border border-secondary">
+                        <img src="~/Asset/img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <div class="px-4 rounded-bottom">
+                            <div class="service-content bg-primary text-center p-4 rounded">
+                                <h5 class="text-white">Táo tươi</h5>
+                                <h3 class="mb-0">Giảm ngay 20%</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="#">
+                    <div class="service-item bg-dark rounded border border-dark">
+                        <img src="~/Asset/img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <div class="px-4 rounded-bottom">
+                            <div class="service-content bg-light text-center p-4 rounded">
+                                <h5 class="text-primary">Trái cây tươi ngon</h5>
+                                <h3 class="mb-0">Giao hàng miễn phí</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="#">
+                    <div class="service-item bg-primary rounded border border-primary">
+                        <img src="~/Asset/img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
+                        <div class="px-4 rounded-bottom">
+                            <div class="service-content bg-secondary text-center p-4 rounded">
+                                <h5 class="text-white">Trái cây nhập khẩu</h5>
+                                <h3 class="mb-0">Giảm 50000VND</h3>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vesitable Shop End -->
+<!-- Banner Section Start-->
+<div class="container-fluid banner bg-secondary my-5">
+    <div class="container py-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <div class="py-4">
+                    <h1 class="display-3 text-white">Trái Cây Nhập Khẩu</h1>
+                    <p class="fw-normal display-3 text-dark mb-4">Tại cửa hàng</p>
+                    <p class="mb-4 text-dark">Trái cây nhập khẩu thượng hạng – tươi ngon tự nhiên, tròn vị tinh túy!</p>
+                    <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">Đặt hàng ngay!</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <img src="~/Asset/img/baner-1.png" class="img-fluid w-100 rounded" alt="">
+                    <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
+                        <h1 style="font-size: 100px;">1</h1>
+                        <div class="d-flex flex-column">
+                            <span class="h2 mb-0">50K</span>
+                            <span class="h4 text-muted mb-0">kg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Section End -->
+<!-- Bestsaler Product Start -->
+
+<div class="container">
+    <div class="row g-4">
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var sanPham in Model.Take(6))
+            {
+                <div class="col-lg-6 col-xl-4">
+                    <div class="p-4 rounded bg-light">
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <img src="@Url.Content(sanPham.AnhSP)" class="img-fluid rounded-circle w-100" alt="@sanPham.TenSP" />
+                            </div>
+                            <div class="col-6">
+                                <a href="@Url.Action("ChiTiet", "SanPham", new { id = sanPham.MaSP })" class="h5">@sanPham.TenSP</a>
+                                <div class="d-flex my-3">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= 4)
+                                        {
+                                            <i class="fas fa-star text-primary"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    }
+                                </div>
+                                <h4 class="mb-3">@sanPham.GiaSP.ToString("N0") đ</h4>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addToCart(@sanPham.MaSP)">
+                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p class="text-muted">Chưa có sản phẩm bán chạy nào.</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<!-- Bestsaler Product End -->
+<!-- Fact Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="bg-light p-5 rounded">
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>Khách hàng hài lòng</h4>
+                        <h1>1963</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>Chất lượng dịch vụ</h4>
+                        <h1>99%</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>Chứng chỉ chất lượng</h4>
+                        <h1>33</h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-3">
+                    <div class="counter bg-white rounded p-5">
+                        <i class="fa fa-users text-secondary"></i>
+                        <h4>Sản phẩm có sẵn</h4>
+                        <h1>789</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fact Start -->
+<!-- Tastimonial Start -->
+<div class="container-fluid testimonial py-5">
+    <div class="container py-5">
+        <div class="testimonial-header text-center">
+            <h4 class="text-primary">Đánh giá của khách hàng</h4>
+            <h1 class="display-5 mb-5 text-dark">"Lời nhận xét từ khách hàng của chúng tôi!"</h1>
+        </div>
+        <div class="owl-carousel testimonial-carousel">
+            <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                <div class="position-relative">
+                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+                    <div class="mb-4 pb-4 border-bottom border-secondary">
+                        <p class="mb-0">
+                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <div class="bg-secondary rounded">
+                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                        </div>
+                        <div class="ms-4 d-block">
+                            <h4 class="text-dark">Client Name</h4>
+                            <p class="m-0 pb-3">Profession</p>
+                            <div class="d-flex pe-5">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                <div class="position-relative">
+                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+                    <div class="mb-4 pb-4 border-bottom border-secondary">
+                        <p class="mb-0">
+                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <div class="bg-secondary rounded">
+                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                        </div>
+                        <div class="ms-4 d-block">
+                            <h4 class="text-dark">Client Name</h4>
+                            <p class="m-0 pb-3">Profession</p>
+                            <div class="d-flex pe-5">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                <div class="position-relative">
+                    <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+                    <div class="mb-4 pb-4 border-bottom border-secondary">
+                        <p class="mb-0">
+                            Lorem Ipsum is simply dummy text of the printing Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        </p>
+                    </div>
+                    <div class="d-flex align-items-center flex-nowrap">
+                        <div class="bg-secondary rounded">
+                            <img src="~/Asset/img/testimonial-1.jpg" class="img-fluid rounded" style="width: 100px; height: 100px;" alt="">
+                        </div>
+                        <div class="ms-4 d-block">
+                            <h4 class="text-dark">Client Name</h4>
+                            <p class="m-0 pb-3">Profession</p>
+                            <div class="d-flex pe-5">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(function () {
+        $(".add-to-cart-btn").on("click", function (e) {
+            e.preventDefault();
+
+            var $btn = $(this);
+            var productId = $btn.data("id");
+
+            // Ngăn bấm nhiều lần
+            if ($btn.data("processing")) return;
+            $btn.data("processing", true);
+
+            $.ajax({
+                url: '@Url.Action("AddToCart", "Home")',
+                type: 'POST',
+                data: { id: productId },
+                success: function (response) {
+                    if (response.success) {
+                        // ✅ Không hiển thị thông báo
+                        if (response.newCount !== undefined) {
+                            $("#cart-count").text(response.newCount);
+                        }
+                    } else if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    } else {
+                        showToast(response.message || "Có lỗi xảy ra.", true);
+                    }
+                },
+                error: function () {
+                    showToast("Lỗi khi gửi yêu cầu tới máy chủ.", true);
+                },
+                complete: function () {
+                    $btn.data("processing", false);
+                }
+            });
+        });
+    });
+
+    // ✅ Hàm hiển thị toast khi bị lỗi
+    function showToast(message, isError = false) {
+        if (!isError) return;
+
+        var toast = $('<div></div>').text(message).css({
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            padding: '10px 20px',
+            backgroundColor: '#dc3545',
+            color: 'white',
+            borderRadius: '5px',
+            zIndex: 10000,
+            boxShadow: '0 0 10px rgba(0,0,0,0.3)',
+            display: 'none'
+        });
+
+        $('body').append(toast);
+        toast.fadeIn(150).delay(1500).fadeOut(300, function () {
+            $(this).remove();
+        });
+    }
+    </script>
+
+    <script>
+        // Search functionality
+        function performSearch(keyword) {
+            if (!keyword || keyword.trim() === '') {
+                showSearchMessage('Vui lòng nhập từ khóa tìm kiếm', 'warning');
+                resetProductDisplay();
+                return;
+            }
+
+            keyword = keyword.toLowerCase().trim();
+            const allProducts = document.querySelectorAll('.product-item');
+            let foundProducts = [];
+            let hasResults = false;
+
+            allProducts.forEach(product => {
+                product.classList.remove('highlight');
+            });
+
+            allProducts.forEach(product => {
+                const productName = product.getAttribute('data-product-name') || '';
+                const productDescription = product.getAttribute('data-product-description') || '';
+
+                if (productName.includes(keyword) || productDescription.includes(keyword)) {
+                    foundProducts.push(product);
+                    hasResults = true;
+                }
+            });
+
+            if (hasResults) {
+                showSearchMessage(`Tìm thấy ${foundProducts.length} sản phẩm cho từ khóa "${keyword}"`, 'success');
+
+                if (foundProducts.length > 0) {
+                    const firstProduct = foundProducts[0];
+                    firstProduct.classList.add('highlight');
+
+                    scrollToProductsSection(() => {
+                        setTimeout(() => {
+                            scrollToProduct(firstProduct);
+                        }, 500);
+                    });
+                }
+            } else {
+                showSearchMessage(`Không tìm thấy sản phẩm nào cho từ khóa "${keyword}"`, 'danger');
+                resetProductDisplay();
+            }
+        }
+
+        function performHeroSearch() {
+            const keyword = document.getElementById('heroSearchInput').value;
+            performSearch(keyword);
+        }
+
+        function performModalSearch() {
+            const keyword = document.getElementById('modalSearchInput').value;
+            performSearch(keyword);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('searchModal'));
+            if (modal) {
+                modal.hide();
+            }
+        }
+
+        function showSearchMessage(message, type) {
+            const messageDiv = document.getElementById('searchMessage');
+            const messageText = document.getElementById('searchMessageText');
+
+            messageText.textContent = message;
+            messageDiv.style.display = 'block';
+
+            const alertDiv = messageDiv.querySelector('.alert');
+            alertDiv.className = `alert alert-${type}`;
+
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function resetProductDisplay() {
+            const allProducts = document.querySelectorAll('.product-item');
+            allProducts.forEach(product => {
+                product.classList.remove('highlight');
+            });
+        }
+
+        function scrollToProductsSection(callback) {
+            const productsSection = document.getElementById('productsSection');
+            if (productsSection) {
+                productsSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+
+                if (callback) {
+                    setTimeout(callback, 800);
+                }
+            }
+        }
+
+        function scrollToProduct(productElement) {
+            if (productElement) {
+                productElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                setTimeout(() => {
+                    productElement.classList.remove('highlight');
+                }, 3000);
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            const heroSearchInput = document.getElementById('heroSearchInput');
+            if (heroSearchInput) {
+                heroSearchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        performHeroSearch();
+                    }
+                });
+            }
+
+            const modalSearchInput = document.getElementById('modalSearchInput');
+            if (modalSearchInput) {
+                modalSearchInput.addEventListener('keypress', function (e) {
+                    if (e.key === 'Enter') {
+                        performModalSearch();
+                    }
+                });
+            }
+
+            // ❌ Đã loại bỏ đoạn fetch AddToCart trùng lặp
+        });
+    </script>
+}
+
+

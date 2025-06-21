@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.active = 4;
+
+}@{
+    var soLuong = Session["SoLuong"] != null ? (int)Session["SoLuong"] : 0;
+}
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Giỏ hàng</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a href="#">Trang</a></li>
+        <li class="breadcrumb-item active text-white">Giỏ hàng</li>
+    </ol>
+</div>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Tổng</th>
+                        <th scope="col">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.SanPham.AnhSP" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.SanPham.TenSP</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@item.SanPham.GiaSP.ToString("N0")</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border quantity-minus" data-id="@item.MaSP">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm text-center border-0 quantity-input" value="@item.SoLuong" readonly>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border quantity-plus" data-id="@item.MaSP">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4">@((item.SanPham.GiaSP * item.SoLuong).ToString("N0"))</p>
+                            </td>
+                            <td>
+                                <button class="btn btn-md rounded-circle bg-light border mt-4 delete-item" data-id="@item.MaSP">
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-5">
+            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Mã giảm giá">
+            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Sử dụng</button>
+        </div>
+        <div class="row g-4 justify-content-end">
+            <div class="col-8"></div>
+            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                <div class="bg-light rounded">
+                    <div class="p-4">
+                        <h1 class="display-6 mb-4">Tổng <span class="fw-normal">Giỏ hàng</span></h1>
+                     
+                        <div class="d-flex justify-content-between mb-4">
+                            <h5 class="mb-0 me-4">Tạm tính:</h5>
+                            <p class="mb-0" id="tam-tinh">0</p>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="mb-0 me-4">Phí vận chuyển: </h5>
+                            <div>
+                                <p class="mb-0" id="phi-ship">Cố định: 3</p>
+                            </div>
+                        </div>
+                        <p class="mb-0 text-end">Shipping in HCM.</p>
+                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Tổng</h5>
+                            <p class="mb-0 pe-4" id="tong-tien">0</p>
+                        </div>
+
+                     
+                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
+                                type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">
+                            Tiến hành thanh toán
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                function capNhatTongTien() {
+                    let tamTinh = 0;
+                    $('tbody tr').each(function () {
+                        let totalText = $(this).find('td:nth-child(5) p').text().replace(/[^\d]/g, '').trim();
+                        let thanhTien = parseInt(totalText);
+                        if (!isNaN(thanhTien)) {
+                            tamTinh += thanhTien;
+                        }
+                    });
+
+                    // Ép tamTinh và phiShip về số nguyên cho chắc chắn
+                    tamTinh = Math.round(tamTinh);
+
+                    // Cập nhật Tạm tính
+                    $('#tam-tinh').text(tamTinh.toLocaleString('vi-VN') + ' đ');
+                    $.post('/Cart/LuuTamTinh', { tamTinh: tamTinh }, function () {
+                        console.log("Tạm tính đã được lưu vào Session.");
+                    });
+                    // Phí ship cố định 10.000đ
+                    let phiShip = 0;
+                    $('#phi-ship').text('Cố định: ' + phiShip.toLocaleString('vi-VN') + ' đ');
+
+                    // Tổng = Tạm tính + Phí ship
+                    let tongTien = tamTinh + phiShip;
+                    $('#tong-tien').text(tongTien.toLocaleString('vi-VN') + ' đ');
+                  
+
+                }
+
+                // Tăng số lượng
+                $('.quantity-plus').off('click').click(function () {
+                    let btn = $(this);
+                    let id = btn.data('id');
+                    let row = btn.closest('tr');
+
+                    $.post('/Cart/TangSoLuong', { maSP: id }, function (response) {
+                        if (response.soLuong !== undefined) {
+                            let quantityInput = row.find('.quantity-input');
+                            let soLuong = response.soLuong;
+
+                            quantityInput.val(soLuong);
+
+                            let donGiaText = row.find('td:nth-child(3) p').text().replace(/[^\d]/g, '').trim();
+                            let donGia = parseInt(donGiaText);
+                            let thanhTien = donGia * soLuong;
+
+                            row.find('td:nth-child(5) p').text(thanhTien.toLocaleString('vi-VN') + ' đ');
+
+                            capNhatTongTien();
+                        }
+                    });
+                });
+
+                // Giảm số lượng
+                $('.quantity-minus').off('click').click(function () {
+                    let btn = $(this);
+                    let id = btn.data('id');
+                    let row = btn.closest('tr');
+                    let quantityInput = row.find('.quantity-input');
+                    let soLuong = parseInt(quantityInput.val());
+
+                    if (soLuong >= 1) {
+                        $.post('/Cart/GiamSoLuong', { maSP: id }, function (response) {
+                            if (response.soLuong !== undefined) {
+                                let newSoLuong = response.soLuong;
+                                quantityInput.val(newSoLuong);
+
+                                let donGiaText = row.find('td:nth-child(3) p').text().replace(/[^\d]/g, '').trim();
+                                let donGia = parseInt(donGiaText);
+                                let thanhTien = donGia * newSoLuong;
+
+                                row.find('td:nth-child(5) p').text(thanhTien.toLocaleString('vi-VN') + ' đ');
+
+                                capNhatTongTien();
+                            }
+                        });
+                    } else if (soLuong === 0) {
+                        $.post('/Cart/XoaSanPham', { maSP: id }, function () {
+                            row.remove();
+                            capNhatTongTien();
+                        });
+                    }
+                });
+
+                // Xóa sản phẩm
+                $('.delete-item').off('click').click(function () {
+                    let btn = $(this);
+                    let id = btn.data('id');
+                    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+                        $.post('/Cart/XoaSanPham', { maSP: id }, function () {
+                            btn.closest('tr').remove();
+                            capNhatTongTien();
+                        });
+                    }
+                });
+
+                // Lần đầu load cũng phải tính tổng tiền
+                capNhatTongTien();
+            });
+        </script>
+    }

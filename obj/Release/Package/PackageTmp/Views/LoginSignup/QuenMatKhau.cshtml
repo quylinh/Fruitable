@@ -1,0 +1,118 @@
+﻿@{ Layout = null; }
+@model doantotnghiep.Models.Account_KhachHang
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký</title>
+    <link rel="stylesheet" href="~/Asset/css/LoginSignup.css" asp-append-version="true">
+</head>
+<body>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-up">
+                        @using (Html.BeginForm("DangKy", "LoginSignup", FormMethod.Post))
+                        {
+                            if (ViewBag.Error != null)
+                            {
+                                <div class="alert alert-danger">@ViewBag.Error</div>
+                            }
+
+                            if (ViewBag.SuccessMessage != null)
+                            {
+                                <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+                            }
+
+                            <div class="input-group">
+                                <i class='bx bxs-user'></i>
+                                @Html.TextBoxFor(m => m.TaiKhoan, new { placeholder = "Username", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bx-mail-send'></i>
+                                @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", type = "email", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                @Html.PasswordFor(m => m.MatKhau, new { placeholder = "Password", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" name="ConfirmPassword" placeholder="Confirm password" required="required" />
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-phone'></i>
+                                @Html.TextBoxFor(m => m.Phone, new { placeholder = "Phone", type = "tel", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-user-detail'></i>
+                                @Html.TextBoxFor(m => m.TenKH, new { placeholder = "Full Name", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-home'></i>
+                                @Html.TextBoxFor(m => m.Diachi, new { placeholder = "Address", required = "required" })
+                            </div>
+                            <div class="input-group">
+                                <i class='bx bxs-calendar'></i>
+                                @Html.TextBoxFor(m => m.Ngaysinh, new { placeholder = "Date of birth (DD/MM/YYYY)", type = "date", required = "required" })
+                            </div>
+                            <button type="submit">Sign up</button>
+                            <p>
+                                <span>Already have an account?</span>
+                                <b onclick="toggle()" class="pointer">Sign in here</b>
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- END SIGN UP -->
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-in">
+                        @using (Html.BeginForm("QuenMatKhau", "LoginSignup", FormMethod.Post))
+                        {
+                            <label for="TaiKhoan" style="margin-left: -48px !important; padding-bottom: 5px;">Tài khoản:</label>
+                            <input type="text" name="TaiKhoan" id="TaiKhoan" required class="form-control" style=" padding-right: 127px;" />
+                            <br />
+                            <br />
+
+                            <button type="submit" class="btn btn-primary">Gửi yêu cầu</button>
+                        }
+
+                        @if (ViewBag.Error != null)
+                        {
+                            <p style="color:red; margin-top:10px;">@ViewBag.Error</p>
+                        }
+
+                        @if (ViewBag.Message != null)
+                        {
+                            <p style="color:green; margin-top:10px;">@ViewBag.Message</p>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- END SIGN IN -->
+        </div>
+        <!-- END FORM SECTION -->
+        <div class="row content-row">
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2 style="text-decoration: none; font-family: Arial, sans-serif; font-weight: bold;">QUÊN MẬT KHẨU?</h2>
+                </div>
+            </div>
+            @*<div class="col align-items-center flex-col">
+                <div class="text sign-up">
+                    <h2>Join with us</h2>
+                </div>
+            </div>*@
+        </div>
+    </div>
+
+    <script src="~/Asset/js/LoginSignup.js"></script>
+</body>
+</html>

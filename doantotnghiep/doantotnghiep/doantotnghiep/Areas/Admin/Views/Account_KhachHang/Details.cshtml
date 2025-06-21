@@ -1,0 +1,82 @@
+﻿@model doantotnghiep.Models.Account_KhachHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết</h2>
+<h4>Tài Khoản</h4>
+<hr />
+<div style="margin-left:30px">
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tài khoản
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TaiKhoan)
+        </dd>
+
+        <dt class="col-sm-2">
+            Mật khẩu
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+        <dt class="col-sm-2">
+            Họ và tên
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenKH)
+        </dd>
+        <dt class="col-sm-2">
+            Ngày sinh
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ngaysinh)
+        </dd>
+        <dt class="col-sm-2">
+            Số điện thoại
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt class="col-sm-2">
+            Email
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+
+
+        <dt class="col-sm-2">
+            Địa chỉ
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Diachi)
+        </dd>
+
+
+
+
+  
+
+
+    </dl>
+</div>
+
+<div style="margin-bottom: 30px; margin-left: 30px;">
+
+
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.AccountID }, new { @class = "btn btn-primary text-white" })
+    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary" })
+</div>

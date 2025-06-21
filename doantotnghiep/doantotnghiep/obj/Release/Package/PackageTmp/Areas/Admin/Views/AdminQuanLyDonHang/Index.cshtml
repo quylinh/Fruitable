@@ -1,0 +1,54 @@
+﻿@model IEnumerable<doantotnghiep.Models.DonHang>
+
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Thêm Đơn Hàng", "Create", "AdminDonHang", new { area = "Admin" },
+        new { @class = "btn btn-primary", style = "background:linear-gradient(195deg,#66bb6a,#43a047);" })
+</p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Danh sách Đơn hàng</h6>
+                </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mã Đơn</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Khách Hàng</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ngày Đặt</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tổng Tiền</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-xs font-weight-bold">@item.MaDH</td>
+                                    <td class="text-xs">@item.Account_KhachHang.TenKH</td>
+                                    <td class="text-xs">@item.NgayTao.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-xs">@String.Format("{0:N0} đ", item.TongTien)</td>
+                                    <td>
+                                        @Html.ActionLink("Chi tiết", "Details", new { id = item.MaDH }, new { @class = "btn btn-primary btn-sm" }) |
+                                        @Html.ActionLink("Cập nhật", "Edit", new { id = item.MaDH }, new { @class = "btn btn-primary btn-sm" }) |
+                                        @Html.ActionLink("Xóa", "Delete", new { id = item.MaDH }, new { @class = "btn btn-danger btn-sm" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

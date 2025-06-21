@@ -1,0 +1,59 @@
+﻿
+
+
+@model doantotnghiep.Models.NhapHang
+
+@{
+    ViewBag.Title = "Nhập hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Nhập hàng</h2>
+<h4>Thông tin nhập kho</h4>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-4" style="margin-left: 30px">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Chọn sản phẩm -->
+            <div class="form-group">
+                <label class="col-form-label">Sản phẩm</label>
+                <div class="col-md-12">
+                    @Html.DropDownList("MaSP", null, "-- Chọn sản phẩm --", new { @class = "form-control", style = "background:#fff;" })
+                    @Html.ValidationMessageFor(m => m.MaSP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Nhập số lượng -->
+            <div class="form-group">
+                <label class="col-form-label">Số lượng nhập</label>
+                <div class="col-md-12">
+                    @Html.EditorFor(m => m.SoLuongNhap, new { htmlAttributes = new { @class = "form-control", style = "background:#fff;" } })
+                    @Html.ValidationMessageFor(m => m.SoLuongNhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Nút Submit và Quay lại -->
+            <div class="form-group">
+                <div class="col-md-12">
+                    <br />
+                    <input type="submit" value="Nhập hàng" class="btn btn-success" />
+                    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success mt-3" style="width: fit-content; margin-left: 30px;">
+        @TempData["Success"]
+    </div>
+}

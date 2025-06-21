@@ -539,10 +539,7 @@
             <div class="owl-carousel testimonial-carousel owl-theme">
                 @foreach (var item in Model)
                 {
-                    var nhanxet = item.NhanXetSanPhams
-                        .OrderByDescending(n => n.NgayNhanXet)
-                        .FirstOrDefault();
-                    if (nhanxet != null)
+                    foreach (var nhanxet in item.NhanXetSanPhams.OrderByDescending(n => n.NgayNhanXet))
                     {
                         <div class="testimonial-item img-border-radius bg-light rounded p-4">
                             <div class="position-relative">
@@ -592,6 +589,7 @@
         {
             <p class="text-center text-muted">Chưa có nhận xét nào.</p>
         }
+
 
 
     </div>

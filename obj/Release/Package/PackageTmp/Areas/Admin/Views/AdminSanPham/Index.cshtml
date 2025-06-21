@@ -1,0 +1,85 @@
+﻿@model IEnumerable<doantotnghiep.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Thêm Sản Phẩm mới", "Create", "AdminSanPham", new { area = "Admin" }, new { @class = "btn btn-primary", style = "background:linear-gradient(195deg,#66bb6a,#43a047);" })
+</p>
+<div class="text-end pe-3">
+    @Html.ActionLink("Nhập hàng", "nhaphang", "adminnhaphuyhang", new { area = "Admin" },
+        new { @class = "btn btn-success btn-sm me-2", style = "background: linear-gradient(195deg,#66bb6a,#43a047);" })
+    @Html.ActionLink("Hủy hàng", "huyhang", "adminnhaphuyhang", new { area = "Admin" },
+        new { @class = "btn btn-danger btn-sm", style = "background: linear-gradient(195deg,#ef5350,#e53935);" })
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                    <h6 class="text-white text-capitalize ps-3">Danh Sách Sản Phẩm</h6>
+                </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table">
+                        <tr>
+
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Tên Sản Phảm
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Danh Mục
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Giá
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Trạng Thái
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2">
+                                        <div>
+                                            <img src="@item.AnhSP" class="avatar avatar-sm rounded-circle me-2" style="mix-blend-mode: multiply;" alt="spotify">
+                                        </div>
+                                        <div class="my-auto">
+                                            <h6 class="mb-0 text-sm">@item.TenSP</h6>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="text-xs font-weight-bold mb-0">
+                                    @Html.DisplayFor(modelItem => item.DanhMucSP.TenDM)
+                                </td>
+                                <td class="text-xs font-weight-bold mb-0">
+                                    @Html.DisplayFor(modelItem => item.GiaSP)
+                                </td>
+                                <td class="text-xs font-weight-bold mb-0">
+                                    @Html.DisplayFor(modelItem => item.TrangThai)
+                                </td>
+                                <td class="align-middle">
+                                    @Html.ActionLink("Cập nhật", "Edit", new { id = item.MaSP }, new { @class = "btn btn-primary" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSP }, new { @class = "btn btn-primary" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaSP }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
