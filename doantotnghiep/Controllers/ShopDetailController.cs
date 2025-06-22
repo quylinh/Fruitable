@@ -15,25 +15,47 @@ namespace doantotnghiep.Controllers
             var sp = db.SanPhams
                 .Include(s => s.NhanXetSanPhams)
                 .FirstOrDefault(s => s.MaSP == id);
-
             if (sp == null)
             {
                 sp = db.SanPhams
                     .Include(s => s.NhanXetSanPhams)
                     .OrderBy(s => s.MaSP)
                     .FirstOrDefault();
-
                 if (sp == null)
                 {
                     return HttpNotFound("Không có sản phẩm nào.");
                 }
             }
 
+            // Đếm số lượng sản phẩm theo danh mục
             ViewBag.SoLuongNhietDoi = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Nhiệt đới");
             ViewBag.SoLuongOnDoi = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Ôn đới");
             ViewBag.SoLuongCamQuyt = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Họ cam quýt");
             ViewBag.SoLuongNhapKhau = db.SanPhams.Count(spItem => spItem.DanhMucSP.TenDM == "Nhập khẩu");
 
+            // Lấy danh sách sản phẩm nổi bật (6 sản phẩm)
+            // Có thể sắp xếp theo số lượng bán, đánh giá cao, hoặc mới nhất
+            ViewBag.SanPhamNoiBat = db.SanPhams
+       .Where(s => s.TrangThai == true)
+       .Select(s => new {
+           SanPham = s,
+           SoLuongBan = db.ChiTietDonHangs
+               .Where(ct => ct.MaSP == s.MaSP)
+               .Sum(ct => (int?)ct.SoLuong) ?? 0
+       })
+       .OrderByDescending(x => x.SoLuongBan)
+       .Take(6)
+       .Select(x => x.SanPham)
+       .ToList();
+
+
+            // Lấy sản phẩm liên quan (cùng danh mục, loại trừ sản phẩm hiện tại)
+            ViewBag.SanPhamLienQuan = db.SanPhams
+                .Include(s => s.DanhMucSP)
+                .Where(s => s.MaDM == sp.MaDM && s.MaSP != sp.MaSP && s.TrangThai == true)
+                .OrderBy(s => Guid.NewGuid()) // Random sắp xếp
+                .Take(8)
+                .ToList();
 
             if (Session["UserID"] != null)
             {
@@ -57,7 +79,6 @@ namespace doantotnghiep.Controllers
                     MaDM = dm.MaDM,
                     SoLuongSP = db.SanPhams.Count(sp => sp.MaDM == dm.MaDM)
                 }).ToList();
-
             ViewBag.DanhMucs = danhMucs;
             return PartialView();
         }
@@ -70,7 +91,6 @@ namespace doantotnghiep.Controllers
             {
                 return RedirectToAction("Index", "LoginSignup");
             }
-
             int userId = (int)Session["UserID"];
 
             // Kiểm tra khách hàng đã mua sản phẩm này chưa

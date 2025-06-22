@@ -74,7 +74,6 @@ C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\Sys
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Webpages.Razor.xml
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Helpers.xml
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\bin\System.Web.Mvc.xml
-C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.AssemblyReference.cache
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CoreCompileInputs.cache
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.csproj.CopyComplete
 C:\Users\quylinh\Desktop\aaaaaaaaaaaaaaaaaaa\doantotnghiep\doantotnghiep\obj\Debug\doantotnghiep.dll

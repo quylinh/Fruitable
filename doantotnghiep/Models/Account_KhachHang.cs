@@ -33,6 +33,7 @@ namespace doantotnghiep.Models
         public string Diachi { get; set; }
         public System.DateTime Ngaysinh { get; set; }
         public string Salt { get; set; }
+        public bool IsActivated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DonHang> DonHangs { get; set; }

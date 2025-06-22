@@ -1,128 +1,489 @@
 ﻿@{
     Layout = null;
 }
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập / Đăng ký</title>
+    <title>Đăng nhập / Đăng ký - FreshFruit</title>
     <link rel="stylesheet" href="~/Asset/css/LoginSignup.css" />
     <script src="~/Asset/js/LoginSignup.js" defer></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="container" class="container">
         <!-- FORM SECTION -->
         <div class="row">
-            <!-- SIGN UP -->
+            <!-- ĐĂNG KÝ -->
             <div class="col align-items-center flex-col sign-up">
                 <div class="form-wrapper align-items-center">
                     <div class="form sign-up">
-                        @if (ViewBag.Error != null)
-                        {
-                            <div class="text-danger">@ViewBag.Error</div>
-                        }
-                        @if (ViewBag.SuccessMessage != null)
-                        {
-                            <div class="text-success">@ViewBag.SuccessMessage</div>
-                        }
+                        <!-- Message Area -->
+                        <div id="messageArea" class="message-area" style="display: none;"></div>
 
-                        @using (Html.BeginForm("DangKy", "LoginSignup", FormMethod.Post))
-                        {
+                        <!-- Form đăng ký -->
+                        <form id="signupForm">
                             <div class="input-group">
                                 <i class='bx bxs-user'></i>
-                                @Html.TextBox("TaiKhoan", null, new { placeholder = "Username", required = "required" })
+                                <input type="text" name="TaiKhoan" id="TaiKhoan" placeholder="Tên tài khoản" required />
                             </div>
+
                             <div class="input-group">
                                 <i class='bx bx-mail-send'></i>
-                                @Html.TextBox("Email", null, new { placeholder = "Email", type = "email", required = "required" })
+                                <input type="email" name="Email" id="Email" placeholder="Email" required />
                             </div>
+
                             <div class="input-group">
                                 <i class='bx bxs-lock-alt'></i>
-                                @Html.Password("MatKhau", null, new { placeholder = "Password", required = "required" })
+                                <input type="password" name="MatKhau" id="MatKhau" placeholder="Mật khẩu" required />
+                                <span class="password-toggle" onclick="togglePassword('MatKhau')">
+                                    <i class='bx bx-hide' id="toggleIcon1"></i>
+                                </span>
                             </div>
+
                             <div class="input-group">
                                 <i class='bx bxs-lock-alt'></i>
-                                <input type="password" name="ConfirmPassword" placeholder="Confirm password" required />
+                                <input type="password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Nhập lại mật khẩu" required />
+                                <span class="password-toggle" onclick="togglePassword('ConfirmPassword')">
+                                    <i class='bx bx-hide' id="toggleIcon2"></i>
+                                </span>
                             </div>
+
+                            <!-- Password strength indicator -->
+                            <div id="passwordStrength" class="password-strength" style="display: none;">
+                                <div class="strength-bar">
+                                    <div class="strength-fill"></div>
+                                </div>
+                                <p class="strength-text">Độ mạnh: <span id="strengthLabel">Yếu</span></p>
+                            </div>
+
                             <div class="input-group">
                                 <i class='bx bx-user'></i>
-                                @Html.TextBox("TenKH", null, new { placeholder = "Full name" })
+                                <input type="text" name="TenKH" id="TenKH" placeholder="Họ và tên" />
                             </div>
+
                             <div class="input-group">
                                 <i class='bx bx-calendar'></i>
-                                <input type="date" name="Ngaysinh" />
+                                <input type="date" name="Ngaysinh" id="Ngaysinh" />
                             </div>
+
                             <div class="input-group">
                                 <i class='bx bx-map'></i>
-                                @Html.TextBox("Diachi", null, new { placeholder = "Address" })
+                                <input type="text" name="Diachi" id="Diachi" placeholder="Địa chỉ" />
                             </div>
-                            <button type="submit">Sign up</button>
-                        }
+
+                            <button type="submit" id="submitBtn">Đăng ký</button>
+                        </form>
 
                         <p>
-                            <span>Already have an account?</span>
-                            <b onclick="toggle()" class="pointer">Sign in here</b>
+                            <span>Đã có tài khoản?</span>
+                            <b onclick="toggle()" class="pointer">Đăng nhập</b>
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- END SIGN UP -->
-            <!-- SIGN IN -->
+
+            <!-- ĐĂNG NHẬP -->
             <div class="col align-items-center flex-col sign-in">
                 <div class="form-wrapper align-items-center">
                     <div class="form sign-in">
+                        <!-- Hiển thị thông báo -->
+                        @if (ViewBag.SuccessMessage != null)
+                        {
+                            <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+                        }
+                        @if (ViewBag.Error != null)
+                        {
+                            <div class="alert alert-danger">@ViewBag.Error</div>
+                        }
                         @if (ViewBag.LoginFail != null)
                         {
-                            <div class="text-danger">@ViewBag.LoginFail</div>
+                            <div class="alert alert-danger">@ViewBag.LoginFail</div>
                         }
 
                         @using (Html.BeginForm("DangNhap", "LoginSignup", FormMethod.Post))
                         {
                             <div class="input-group">
                                 <i class='bx bxs-user'></i>
-                                <input type="text" name="TaiKhoan" placeholder="Username" required />
+                                <input type="text" name="TaiKhoan" placeholder="Tên tài khoản" required />
                             </div>
                             <div class="input-group">
                                 <i class='bx bxs-lock-alt'></i>
-                                <input type="password" name="MatKhau" placeholder="Password" required />
+                                <input type="password" name="MatKhau" id="loginPassword" placeholder="Mật khẩu" required />
+                                <span class="password-toggle" onclick="togglePassword('loginPassword')">
+                                    <i class='bx bx-hide' id="toggleIcon3"></i>
+                                </span>
                             </div>
-                            <button type="submit">Sign in</button>
+                            <button type="submit">Đăng nhập</button>
                         }
 
                         <p>
-                            <b><a href="@Url.Action("QuenMatKhau", "LoginSignup")">Forgot password?</a></b>
+                            <b><a href="@Url.Action("QuenMatKhau", "LoginSignup")">Quên mật khẩu?</a></b>
                         </p>
                         <p>
-                            <span>Don't have an account?</span>
-                            <b onclick="toggle()" class="pointer">Sign up here</b>
+                            <span>Chưa có tài khoản?</span>
+                            <b onclick="toggle()" class="pointer">Đăng ký ngay</b>
                         </p>
                     </div>
                 </div>
             </div>
-            <!-- END SIGN IN -->
         </div>
-        <!-- END FORM SECTION -->
-        <!-- CONTENT SECTION -->
+
+        <!-- PHẦN NỘI DUNG BÊN PHẢI / TRÁI -->
         <div class="row content-row">
-            <!-- SIGN IN CONTENT -->
             <div class="col align-items-center flex-col">
                 <div class="text sign-in">
-                    <h2>Welcome</h2>
+                    <h2>Chào mừng bạn<br />trở lại</h2>
+                    <p>Đăng nhập để tiếp tục mua sắm</p>
                 </div>
                 <div class="img sign-in"></div>
             </div>
 
-            <!-- SIGN UP CONTENT -->
             <div class="col align-items-center flex-col">
                 <div class="img sign-up"></div>
                 <div class="text sign-up">
-                    <h2>Join with us</h2>
+                    <h2>Tham gia cùng chúng tôi</h2>
+                    <p>Tạo tài khoản để trải nghiệm dịch vụ tốt nhất</p>
                 </div>
             </div>
         </div>
-        <!-- END CONTENT SECTION -->
     </div>
+
+    <script>
+        $(document).ready(function () {
+            // Xử lý form đăng ký với AJAX
+            $('#signupForm').on('submit', function (e) {
+                e.preventDefault();
+
+                if (!validateForm()) return;
+
+                const submitBtn = $('#submitBtn');
+                submitBtn.prop('disabled', true).text('Đang xử lý...');
+
+                const formData = {
+                    'TaiKhoan': $('#TaiKhoan').val().trim(),
+                    'MatKhau': $('#MatKhau').val(),
+                    'ConfirmPassword': $('#ConfirmPassword').val(),
+                    'Email': $('#Email').val().trim(),
+                    'TenKH': $('#TenKH').val().trim(),
+                    'Ngaysinh': $('#Ngaysinh').val(),
+                    'Diachi': $('#Diachi').val().trim()
+                };
+
+                $.ajax({
+                    url: '@Url.Action("DangKy", "LoginSignup")',
+                    type: 'POST',
+                    data: formData,
+                    success: function () {
+                        showMessage('Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.', 'success');
+                        $('#signupForm')[0].reset();
+                        $('#passwordStrength').hide();
+
+                        setTimeout(() => {
+                            if (typeof toggle === 'function') toggle();
+                        }, 2000);
+                    },
+                    error: function (xhr) {
+                        let errorMessage = 'Có lỗi xảy ra. Vui lòng thử lại.';
+                        if (xhr.responseText) {
+                            try {
+                                const response = JSON.parse(xhr.responseText);
+                                errorMessage = response.message || errorMessage;
+                            } catch (e) {
+                                // Giữ nguyên message mặc định
+                            }
+                        }
+                        showMessage(errorMessage, 'error');
+                    },
+                    complete: function () {
+                        submitBtn.prop('disabled', false).text('Đăng ký');
+                    }
+                });
+            });
+
+            // Validation form
+            function validateForm() {
+                const errors = [];
+
+                const taiKhoan = $('#TaiKhoan').val().trim();
+                if (taiKhoan.length < 3) {
+                    errors.push('Tên tài khoản phải có ít nhất 3 ký tự');
+                }
+
+                const email = $('#Email').val().trim();
+                const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+                if (!emailRegex.test(email)) {
+                    errors.push('Email không hợp lệ');
+                }
+
+                const matKhau = $('#MatKhau').val();
+                const confirmPassword = $('#ConfirmPassword').val();
+
+                if (matKhau.length < 6) {
+                    errors.push('Mật khẩu phải có ít nhất 6 ký tự');
+                }
+
+                if (matKhau !== confirmPassword) {
+                    errors.push('Mật khẩu xác nhận không khớp');
+                }
+
+                if (errors.length > 0) {
+                    showMessage(errors.join('<br>'), 'error');
+                    return false;
+                }
+                return true;
+            }
+
+            // Hiển thị thông báo
+            function showMessage(message, type) {
+                const messageArea = $('#messageArea');
+                const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+
+                messageArea.html(`<div class="alert ${alertClass}">${message}</div>`).show();
+
+                setTimeout(() => {
+                    messageArea.fadeOut();
+                }, 5000);
+            }
+
+            // Kiểm tra độ mạnh mật khẩu
+            $('#MatKhau').on('input', function () {
+                const password = $(this).val();
+                checkPasswordStrength(password);
+            });
+
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                let strengthText = '';
+                let strengthColor = '';
+
+                if (password.length >= 6) strength++;
+                if (/[a-z]/.test(password)) strength++;
+                if (/[A-Z]/.test(password)) strength++;
+                if (/[0-9]/.test(password)) strength++;
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+                switch (strength) {
+                    case 0:
+                    case 1:
+                        strengthText = 'Rất yếu';
+                        strengthColor = '#ff4757';
+                        break;
+                    case 2:
+                        strengthText = 'Yếu';
+                        strengthColor = '#ffa502';
+                        break;
+                    case 3:
+                        strengthText = 'Trung bình';
+                        strengthColor = '#f1c40f';
+                        break;
+                    case 4:
+                        strengthText = 'Mạnh';
+                        strengthColor = '#2ed573';
+                        break;
+                    case 5:
+                        strengthText = 'Rất mạnh';
+                        strengthColor = '#00d2d3';
+                        break;
+                }
+
+                if (password.length > 0) {
+                    $('#passwordStrength').show();
+                    $('#strengthLabel').text(strengthText);
+                    $('.strength-fill').css({
+                        'width': (strength * 20) + '%',
+                        'background-color': strengthColor
+                    });
+                } else {
+                    $('#passwordStrength').hide();
+                }
+            }
+
+            // Ẩn thông báo tự động
+            setTimeout(() => {
+                $('.alert').fadeOut();
+            }, 8000);
+        });
+
+        // Toggle hiển thị mật khẩu
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            let iconId = 'toggleIcon1';
+
+            if (inputId === 'ConfirmPassword') iconId = 'toggleIcon2';
+            else if (inputId === 'loginPassword') iconId = 'toggleIcon3';
+
+            const icon = document.getElementById(iconId);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'bx bx-show';
+            } else {
+                input.type = 'password';
+                icon.className = 'bx bx-hide';
+            }
+        }
+    </script>
+
+    <style>
+        /* Thông báo */
+        .alert {
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .message-area {
+            margin-bottom: 15px;
+        }
+
+        /* Input groups */
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 45px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Password toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            z-index: 2;
+        }
+
+        .password-toggle:hover {
+            color: #333;
+        }
+
+        /* Password strength */
+        .password-strength {
+            margin-bottom: 15px;
+        }
+
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            margin: 0;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Links and text */
+        .pointer {
+            cursor: pointer;
+            color: #4CAF50;
+        }
+
+        .pointer:hover {
+            text-decoration: underline;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        media (max-width: 768px) {
+            .input-group input {
+                padding: 10px 40px;
+                font-size: 14px;
+            }
+
+            button {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .alert {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
 </body>
 </html>

@@ -18,6 +18,7 @@
     <NavigationProperty Name="GioHangs1" Relationship="Self.FK__GioHang__MaKH__60A75C0F" FromRole="Account_KhachHang" ToRole="GioHang" />
     <NavigationProperty Name="NhanXetSanPhams" Relationship="Self.FK__NhanXetSan__MaKH__2B0A656D" FromRole="Account_KhachHang" ToRole="NhanXetSanPham" />
     <NavigationProperty Name="ChiTietDonHangs" Relationship="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang" FromRole="Account_KhachHang" ToRole="ChiTietDonHang" />
+    <Property Name="IsActivated" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="ChiTietGioHang">
     <Key>

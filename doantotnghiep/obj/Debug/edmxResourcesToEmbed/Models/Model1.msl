@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Account_KhachHang">
       <EntityTypeMapping TypeName="FreshFruitDBModel.Account_KhachHang">
         <MappingFragment StoreEntitySet="Account_KhachHang">
+          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
           <ScalarProperty Name="AccountID" ColumnName="AccountID" />
           <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
           <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />

@@ -18,6 +18,7 @@
           <Property Name="Diachi" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Ngaysinh" Type="date" Nullable="false" />
           <Property Name="Salt" Type="varchar" MaxLength="100" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietDonHang">
           <Key>
@@ -515,6 +516,7 @@ warning 6002: The table/view 'FreshFruitDB.dbo.ChiTietDonHangView' does not have
           <NavigationProperty Name="GioHangs1" Relationship="Self.FK__GioHang__MaKH__60A75C0F" FromRole="Account_KhachHang" ToRole="GioHang" />
           <NavigationProperty Name="NhanXetSanPhams" Relationship="Self.FK__NhanXetSan__MaKH__2B0A656D" FromRole="Account_KhachHang" ToRole="NhanXetSanPham" />
           <NavigationProperty Name="ChiTietDonHangs" Relationship="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang" FromRole="Account_KhachHang" ToRole="ChiTietDonHang" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietGioHang">
           <Key>
@@ -1028,6 +1030,7 @@ warning 6002: The table/view 'FreshFruitDB.dbo.ChiTietDonHangView' does not have
           <EntitySetMapping Name="Account_KhachHang">
             <EntityTypeMapping TypeName="FreshFruitDBModel.Account_KhachHang">
               <MappingFragment StoreEntitySet="Account_KhachHang">
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
                 <ScalarProperty Name="AccountID" ColumnName="AccountID" />
                 <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
                 <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
