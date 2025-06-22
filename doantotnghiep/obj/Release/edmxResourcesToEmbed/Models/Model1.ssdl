@@ -13,6 +13,7 @@
     <Property Name="Diachi" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="Ngaysinh" Type="date" Nullable="false" />
     <Property Name="Salt" Type="varchar" MaxLength="100" />
+    <Property Name="IsActivated" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ChiTietDonHang">
     <Key>
@@ -22,11 +23,11 @@
     <Property Name="MaDH" Type="int" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
     <Property Name="TongTien" Type="int" Nullable="false" />
-    <Property Name="Ngaygiao" Type="date" />
     <Property Name="SoLuong" Type="int" />
     <Property Name="GiaSP" Type="int" />
     <Property Name="TenSP" Type="nvarchar" MaxLength="255" />
     <Property Name="MaKH" Type="int" />
+    <Property Name="Ngaygiao" Type="datetime" />
   </EntityType>
   <EntityType Name="ChiTietGioHang">
     <Key>

@@ -17,26 +17,8 @@
     <NavigationProperty Name="GioHangs" Relationship="Self.FK__GioHang__MaKH__1F98B2C1" FromRole="Account_KhachHang" ToRole="GioHang" />
     <NavigationProperty Name="GioHangs1" Relationship="Self.FK__GioHang__MaKH__60A75C0F" FromRole="Account_KhachHang" ToRole="GioHang" />
     <NavigationProperty Name="NhanXetSanPhams" Relationship="Self.FK__NhanXetSan__MaKH__2B0A656D" FromRole="Account_KhachHang" ToRole="NhanXetSanPham" />
-    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK_ChiTietDonHang_KhachHang" FromRole="Account_KhachHang" ToRole="ChiTietDonHang" />
-  </EntityType>
-  <EntityType Name="ChiTietDonHang">
-    <Key>
-      <PropertyRef Name="MaCTDH" />
-    </Key>
-    <Property Name="MaCTDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaDH" Type="Int32" Nullable="false" />
-    <Property Name="MaSP" Type="Int32" Nullable="false" />
-    <Property Name="TongTien" Type="Int32" Nullable="false" />
-    <Property Name="Ngaygiao" Type="DateTime" Precision="0" />
-    <Property Name="SoLuong" Type="Int32" />
-    <Property Name="GiaSP" Type="Int32" />
-    <Property Name="TenSP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="MaKH" Type="Int32" />
-    <NavigationProperty Name="Account_KhachHang" Relationship="Self.FK_ChiTietDonHang_KhachHang" FromRole="ChiTietDonHang" ToRole="Account_KhachHang" />
-    <NavigationProperty Name="DonHang" Relationship="Self.FK__ChiTietDon__MaDH__1BC821DD" FromRole="ChiTietDonHang" ToRole="DonHang" />
-    <NavigationProperty Name="DonHang1" Relationship="Self.FK__ChiTietDon__MaDH__412EB0B6" FromRole="ChiTietDonHang" ToRole="DonHang" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietDon__MaSP__1CBC4616" FromRole="ChiTietDonHang" ToRole="SanPham" />
-    <NavigationProperty Name="SanPham1" Relationship="Self.FK__ChiTietDon__MaSP__4222D4EF" FromRole="ChiTietDonHang" ToRole="SanPham" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang" FromRole="Account_KhachHang" ToRole="ChiTietDonHang" />
+    <Property Name="IsActivated" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="ChiTietGioHang">
     <Key>
@@ -78,8 +60,8 @@
     <Property Name="SDTNguoiNhan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="PhiVanChuyen" Type="Int32" />
     <NavigationProperty Name="Account_KhachHang" Relationship="Self.FK__DonHang__MaKH__3E52440B" FromRole="DonHang" ToRole="Account_KhachHang" />
-    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDon__MaDH__1BC821DD" FromRole="DonHang" ToRole="ChiTietDonHang" />
-    <NavigationProperty Name="ChiTietDonHangs1" Relationship="Self.FK__ChiTietDon__MaDH__412EB0B6" FromRole="DonHang" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaDH__1BC821DD" FromRole="DonHang" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="ChiTietDonHangs1" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaDH__412EB0B6" FromRole="DonHang" ToRole="ChiTietDonHang" />
   </EntityType>
   <EntityType Name="GioHang">
     <Key>
@@ -143,8 +125,6 @@
     <Property Name="NgayHuy" Type="DateTime" Precision="0" />
     <Property Name="DonViTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TonKho" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChiTietDonHangs" Relationship="Self.FK__ChiTietDon__MaSP__1CBC4616" FromRole="SanPham" ToRole="ChiTietDonHang" />
-    <NavigationProperty Name="ChiTietDonHangs1" Relationship="Self.FK__ChiTietDon__MaSP__4222D4EF" FromRole="SanPham" ToRole="ChiTietDonHang" />
     <NavigationProperty Name="ChiTietGioHangs" Relationship="Self.FK__ChiTietGio__MaSP__1EA48E88" FromRole="SanPham" ToRole="ChiTietGioHang" />
     <NavigationProperty Name="ChiTietGioHangs1" Relationship="Self.FK__ChiTietGio__MaSP__656C112C" FromRole="SanPham" ToRole="ChiTietGioHang" />
     <NavigationProperty Name="DanhMucSP" Relationship="Self.FK__SanPham__MaDM__2180FB33" FromRole="SanPham" ToRole="DanhMucSP" />
@@ -152,6 +132,8 @@
     <NavigationProperty Name="HuyHangs" Relationship="Self.FK__HuyDonHang__MaSP__40F9A68C" FromRole="SanPham" ToRole="HuyHang" />
     <NavigationProperty Name="NhanXetSanPhams" Relationship="Self.FK__NhanXetSan__MaSP__2BFE89A6" FromRole="SanPham" ToRole="NhanXetSanPham" />
     <NavigationProperty Name="NhapHangs" Relationship="Self.FK__NhapHang__MaSP__3D2915A8" FromRole="SanPham" ToRole="NhapHang" />
+    <NavigationProperty Name="ChiTietDonHangs" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaSP__1CBC4616" FromRole="SanPham" ToRole="ChiTietDonHang" />
+    <NavigationProperty Name="ChiTietDonHangs1" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaSP__4222D4EF" FromRole="SanPham" ToRole="ChiTietDonHang" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -224,66 +206,6 @@
       </Principal>
       <Dependent Role="NhanXetSanPham">
         <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ChiTietDonHang_KhachHang">
-    <End Role="Account_KhachHang" Type="Self.Account_KhachHang" Multiplicity="0..1" />
-    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Account_KhachHang">
-        <PropertyRef Name="AccountID" />
-      </Principal>
-      <Dependent Role="ChiTietDonHang">
-        <PropertyRef Name="MaKH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ChiTietDon__MaDH__1BC821DD">
-    <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
-    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DonHang">
-        <PropertyRef Name="MaDH" />
-      </Principal>
-      <Dependent Role="ChiTietDonHang">
-        <PropertyRef Name="MaDH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ChiTietDon__MaDH__412EB0B6">
-    <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
-    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DonHang">
-        <PropertyRef Name="MaDH" />
-      </Principal>
-      <Dependent Role="ChiTietDonHang">
-        <PropertyRef Name="MaDH" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ChiTietDon__MaSP__1CBC4616">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="ChiTietDonHang">
-        <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ChiTietDon__MaSP__4222D4EF">
-    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="SanPham">
-        <PropertyRef Name="MaSP" />
-      </Principal>
-      <Dependent Role="ChiTietDonHang">
-        <PropertyRef Name="MaSP" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -397,7 +319,6 @@
   </Association>
   <EntityContainer Name="FreshFruitDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Account_KhachHang" EntityType="Self.Account_KhachHang" />
-    <EntitySet Name="ChiTietDonHangs" EntityType="Self.ChiTietDonHang" />
     <EntitySet Name="ChiTietGioHangs" EntityType="Self.ChiTietGioHang" />
     <EntitySet Name="DanhMucSPs" EntityType="Self.DanhMucSP" />
     <EntitySet Name="DonHangs" EntityType="Self.DonHang" />
@@ -423,26 +344,6 @@
     <AssociationSet Name="FK__NhanXetSan__MaKH__2B0A656D" Association="Self.FK__NhanXetSan__MaKH__2B0A656D">
       <End Role="Account_KhachHang" EntitySet="Account_KhachHang" />
       <End Role="NhanXetSanPham" EntitySet="NhanXetSanPhams" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ChiTietDonHang_KhachHang" Association="Self.FK_ChiTietDonHang_KhachHang">
-      <End Role="Account_KhachHang" EntitySet="Account_KhachHang" />
-      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ChiTietDon__MaDH__1BC821DD" Association="Self.FK__ChiTietDon__MaDH__1BC821DD">
-      <End Role="DonHang" EntitySet="DonHangs" />
-      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ChiTietDon__MaDH__412EB0B6" Association="Self.FK__ChiTietDon__MaDH__412EB0B6">
-      <End Role="DonHang" EntitySet="DonHangs" />
-      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ChiTietDon__MaSP__1CBC4616" Association="Self.FK__ChiTietDon__MaSP__1CBC4616">
-      <End Role="SanPham" EntitySet="SanPhams" />
-      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ChiTietDon__MaSP__4222D4EF" Association="Self.FK__ChiTietDon__MaSP__4222D4EF">
-      <End Role="SanPham" EntitySet="SanPhams" />
-      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
     </AssociationSet>
     <AssociationSet Name="FK__ChiTietGi__MaGio__1DB06A4F" Association="Self.FK__ChiTietGi__MaGio__1DB06A4F">
       <End Role="GioHang" EntitySet="GioHangs" />
@@ -510,6 +411,27 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="ChiTietDonHangs" EntityType="FreshFruitDBModel.ChiTietDonHang" />
+    <AssociationSet Name="FK_ChiTietDonHang_KhachHang" Association="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang">
+      <End Role="Account_KhachHang" EntitySet="Account_KhachHang" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDon__MaDH__1BC821DD" Association="FreshFruitDBModel.FK__ChiTietDon__MaDH__1BC821DD">
+      <End Role="DonHang" EntitySet="DonHangs" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDon__MaDH__412EB0B6" Association="FreshFruitDBModel.FK__ChiTietDon__MaDH__412EB0B6">
+      <End Role="DonHang" EntitySet="DonHangs" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDon__MaSP__1CBC4616" Association="FreshFruitDBModel.FK__ChiTietDon__MaSP__1CBC4616">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDon__MaSP__4222D4EF" Association="FreshFruitDBModel.FK__ChiTietDon__MaSP__4222D4EF">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHangs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -522,4 +444,83 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="MaCTDH" />
+    </Key>
+    <Property Name="MaCTDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaDH" Type="Int32" Nullable="false" />
+    <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="TongTien" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" />
+    <Property Name="GiaSP" Type="Int32" />
+    <Property Name="TenSP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MaKH" Type="Int32" />
+    <Property Name="Ngaygiao" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Account_KhachHang" Relationship="FreshFruitDBModel.FK_ChiTietDonHang_KhachHang" FromRole="ChiTietDonHang" ToRole="Account_KhachHang" />
+    <NavigationProperty Name="DonHang" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaDH__1BC821DD" FromRole="ChiTietDonHang" ToRole="DonHang" />
+    <NavigationProperty Name="DonHang1" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaDH__412EB0B6" FromRole="ChiTietDonHang" ToRole="DonHang" />
+    <NavigationProperty Name="SanPham" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaSP__1CBC4616" FromRole="ChiTietDonHang" ToRole="SanPham" />
+    <NavigationProperty Name="SanPham1" Relationship="FreshFruitDBModel.FK__ChiTietDon__MaSP__4222D4EF" FromRole="ChiTietDonHang" ToRole="SanPham" />
+  </EntityType>
+  <Association Name="FK_ChiTietDonHang_KhachHang">
+    <End Type="FreshFruitDBModel.Account_KhachHang" Role="Account_KhachHang" Multiplicity="0..1" />
+    <End Type="FreshFruitDBModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account_KhachHang">
+        <PropertyRef Name="AccountID" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaKH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDon__MaDH__1BC821DD">
+    <End Type="FreshFruitDBModel.DonHang" Role="DonHang" Multiplicity="1" />
+    <End Type="FreshFruitDBModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonHang">
+        <PropertyRef Name="MaDH" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDon__MaDH__412EB0B6">
+    <End Type="FreshFruitDBModel.DonHang" Role="DonHang" Multiplicity="1" />
+    <End Type="FreshFruitDBModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonHang">
+        <PropertyRef Name="MaDH" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaDH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDon__MaSP__1CBC4616">
+    <End Type="FreshFruitDBModel.SanPham" Role="SanPham" Multiplicity="1" />
+    <End Type="FreshFruitDBModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDon__MaSP__4222D4EF">
+    <End Type="FreshFruitDBModel.SanPham" Role="SanPham" Multiplicity="1" />
+    <End Type="FreshFruitDBModel.ChiTietDonHang" Role="ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

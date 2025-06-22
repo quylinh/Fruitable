@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Account_KhachHang">
       <EntityTypeMapping TypeName="FreshFruitDBModel.Account_KhachHang">
         <MappingFragment StoreEntitySet="Account_KhachHang">
+          <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
           <ScalarProperty Name="AccountID" ColumnName="AccountID" />
           <ScalarProperty Name="TaiKhoan" ColumnName="TaiKhoan" />
           <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
@@ -13,21 +14,6 @@
           <ScalarProperty Name="Diachi" ColumnName="Diachi" />
           <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
           <ScalarProperty Name="Salt" ColumnName="Salt" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ChiTietDonHangs">
-      <EntityTypeMapping TypeName="FreshFruitDBModel.ChiTietDonHang">
-        <MappingFragment StoreEntitySet="ChiTietDonHang">
-          <ScalarProperty Name="MaCTDH" ColumnName="MaCTDH" />
-          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
-          <ScalarProperty Name="Ngaygiao" ColumnName="Ngaygiao" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="GiaSP" ColumnName="GiaSP" />
-          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
-          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -176,5 +162,20 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FreshFruitDBModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FreshFruitDBModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="ChiTietDonHangs">
+      <EntityTypeMapping TypeName="FreshFruitDBModel.ChiTietDonHang">
+        <MappingFragment StoreEntitySet="ChiTietDonHang">
+          <ScalarProperty Name="Ngaygiao" ColumnName="Ngaygiao" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="GiaSP" ColumnName="GiaSP" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+          <ScalarProperty Name="MaCTDH" ColumnName="MaCTDH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
